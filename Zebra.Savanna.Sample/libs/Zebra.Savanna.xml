@@ -1,0 +1,1604 @@
+<?xml version="1.0"?>
+<doc>
+    <assembly>
+        <name>Zebra.Savanna</name>
+    </assembly>
+    <members>
+        <member name="T:Zebra.Savanna.CreateBarcode">
+            <summary>
+            Provides access to the Savanna barcode creation APIs.
+            </summary>
+        </member>
+        <member name="M:Zebra.Savanna.CreateBarcode.CreateAsync(Zebra.Savanna.Symbology,System.String,System.Int32,Zebra.Savanna.Rotation,System.Boolean)">
+            <summary>
+            Generates a barcode from the text provided and returns a PNG image
+            </summary>
+            <param name="symbology">The barcode symbology.</param>
+            <param name="text">
+            The data or text to include in the generated barcode. Usually an error will occur when the barcode
+            symbology cannot support the text provided. Different symbology allow for numbers only, or alpha-numeric,
+            or uppercase alphabets, and some restrict characters. For example: code39 only accepts numbers and
+            uppercase letters.
+            </param>
+            <param name="scale">
+            Sets both the x-axis and the y-axis scaling factors. Must be an integer &gt; 0. Use if you want default X
+            &amp; Y, just different size.
+            short.
+            </param>
+            <param name="rotate">Rotates the barcode in 90 degree increments.</param>
+            <param name="includeText">
+            Allows for the data included in the barcode to be printed in human readable form with the barcode (usually
+            printed text under the linear barcode, this setting is ignored for many 2D symbologies such as qrcode).
+            </param>
+            <returns>A <see cref="T:byte[]"/> containing the png-encoded image</returns>
+        </member>
+        <member name="M:Zebra.Savanna.CreateBarcode.CreateAsync(Zebra.Savanna.Symbology,System.String,System.Int32,System.Int32,Zebra.Savanna.Rotation,System.Boolean)">
+            <summary>
+            Generates a barcode from the text provided and returns a PNG image
+            </summary>
+            <param name="symbology">The barcode symbology.</param>
+            <param name="text">
+            The data or text to include in the generated barcode. Usually an error will occur when the barcode
+            symbology cannot support the text provided. Different symbology allow for numbers only, or alpha-numeric,
+            or uppercase alphabets, and some restrict characters. For example: code39 only accepts numbers and
+            uppercase letters.
+            </param>
+            <param name="scaleX">
+            Sets the x-axis. Must be an integer &gt; 0. Use with scaleY, if using scale only, leave scaleX &amp; scaleY
+            blank. Allows proportional changes to the resulting barcode, helpful with linear barcodes to make tall or
+            short.
+            </param>
+            <param name="scaleY">Sets the y-axis scaling factors. Must be an integer &gt; 0. Use with scaleX.</param>
+            <param name="rotate">Rotates the barcode in 90 degree increments.</param>
+            <param name="includeText">
+            Allows for the data included in the barcode to be printed in human readable form with the barcode (usually
+            printed text under the linear barcode, this setting is ignored for many 2D symbologies such as qrcode).
+            </param>
+            <returns>A <see cref="T:byte[]"/> containing the png-encoded image</returns>
+        </member>
+        <member name="T:Zebra.Savanna.FDARecall">
+            <summary>
+            Provides access to the Savanna FDA Recall APIs.
+            </summary>
+        </member>
+        <member name="M:Zebra.Savanna.FDARecall.DeviceSearchAsync(System.String,System.Int32)">
+            <summary>
+            Returns medical device recall notices for a given description
+            </summary>
+            <param name="search">A simple one word search string</param>
+            <param name="limit"> Maximum number of records to return</param>
+            <returns> A <see cref="T:System.String"/> containing results from the device recall search, if any</returns>
+        </member>
+        <member name="M:Zebra.Savanna.FDARecall.DrugSearchAsync(System.String,System.Int32)">
+            <summary>
+            Returns drug recall notices for a given description
+            </summary>
+            <param name="search"> A simple one word search string</param>
+            <param name="limit">Maximum number of records to return</param>
+            <returns>A <see cref="T:System.String"/> containing results from the drug recall search, if any</returns>
+        </member>
+        <member name="M:Zebra.Savanna.FDARecall.FoodUpcAsync(System.String,System.Int32)">
+            <summary>
+            Returns food recall notices for a given UPC code
+            </summary>
+            <param name="upc">A valid UPC code for a food item</param>
+            <param name="limit">Maximum number of records to return (maximum 99)</param>
+            <returns>A <see cref="T:System.String"/> containing results from the food recall lookup, if any</returns>
+        </member>
+        <member name="M:Zebra.Savanna.FDARecall.DrugUpcAsync(System.String,System.Int32)">
+            <summary>
+            Returns FDA drug recall notices for a UPC code
+            </summary>
+            <param name="upc">Value</param>
+            <param name="limit">Maximum number of records to return</param>
+            <returns>A <see cref="T:System.String"/> containing results from the drug recall lookup, if any</returns>
+        </member>
+        <member name="M:Zebra.Savanna.FDARecall.DeserializeDeviceSearchAsync(System.String,System.Int32)">
+            <summary>
+            Returns medical device recall notices for a given description
+            </summary>
+            <param name="search">A simple one word search string</param>
+            <param name="limit"> Maximum number of records to return</param>
+            <returns> A <see cref="T:System.String"/> containing results from the device recall search, if any</returns>
+        </member>
+        <member name="M:Zebra.Savanna.FDARecall.DeserializeDrugSearchAsync(System.String,System.Int32)">
+            <summary>
+            Returns drug recall notices for a given description
+            </summary>
+            <param name="search"> A simple one word search string</param>
+            <param name="limit">Maximum number of records to return</param>
+            <returns>A <see cref="T:System.String"/> containing results from the drug recall search, if any</returns>
+        </member>
+        <member name="M:Zebra.Savanna.FDARecall.DeserializeFoodUpcAsync(System.String,System.Int32)">
+            <summary>
+            Returns food recall notices for a given UPC code
+            </summary>
+            <param name="upc">A valid UPC code for a food item</param>
+            <param name="limit">Maximum number of records to return (maximum 99)</param>
+            <returns>A <see cref="T:System.String"/> containing results from the food recall lookup, if any</returns>
+        </member>
+        <member name="M:Zebra.Savanna.FDARecall.DeserializeDrugUpcAsync(System.String,System.Int32)">
+            <summary>
+            Returns FDA drug recall notices for a UPC code
+            </summary>
+            <param name="upc">Value</param>
+            <param name="limit">Maximum number of records to return</param>
+            <returns>A <see cref="T:System.String"/> containing results from the drug recall lookup, if any</returns>
+        </member>
+        <member name="T:Zebra.Savanna.Models.APIEnumConverter">
+            <summary>
+            Converts a Savanna enum to and from JSON.
+            </summary>
+        </member>
+        <member name="M:Zebra.Savanna.Models.APIEnumConverter.WriteJson(Newtonsoft.Json.JsonWriter,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Writes the JSON representation of the object.
+            </summary>
+            <param name="writer">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to write to.</param>
+            <param name="value">The value.</param>
+            <param name="serializer">The calling serialzer.</param>
+        </member>
+        <member name="M:Zebra.Savanna.Models.APIEnumConverter.ReadJson(Newtonsoft.Json.JsonReader,System.Type,System.Object,Newtonsoft.Json.JsonSerializer)">
+            <summary>
+            Reads the JSON representation of the object.
+            </summary>
+            <param name="reader">The <see cref="T:Newtonsoft.Json.JsonWriter"/> to read from.</param>
+            <param name="objectType">Type of the object.</param>
+            <param name="existingValue">The existing value of object being read.</param>
+            <param name="serializer">The calling serializer.</param>
+            <returns>The object value.</returns>
+        </member>
+        <member name="M:Zebra.Savanna.Models.APIEnumConverter.CanConvert(System.Type)">
+            <summary>
+            Determines whether this instance can convert the specified object type.
+            </summary>
+            <param name="objectType">Type of the object.</param>
+            <returns><c>true</c> if this instance can convert the specified object type; otherwise, <c>false</c>.</returns>
+        </member>
+        <member name="T:Zebra.Savanna.Models.BarcodeData">
+            <summary>
+            Response object for UPC lookup
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.BarcodeData.Code">
+            <summary>
+            The status code returned by the API.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.BarcodeData.Total">
+            <summary>
+            Total number of records matching the search criteria.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.BarcodeData.Offset">
+            <summary>
+            Offset (page) of results.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.BarcodeData.Items">
+            <summary>
+            Collection of items matching the UPC lookup query.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Classification">
+            <summary>
+            Numerical designation (I, II, or III) that is assigned by FDA to a particular product recall that indicates the
+            relative degree of health hazard.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.Classification.ClassI">
+            <summary>
+            Dangerous or defective products that predictably could cause serious health problems or death. Examples
+            include: food found to contain botulinum toxin, food with undeclared allergens, a label mix-up on a
+            lifesaving drug, or a defective artificial heart valve.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.Classification.ClassII">
+            <summary>
+            Products that might cause a temporary health problem, or pose only a slight threat of a serious nature.
+            Example: a drug that is under-strength but that is not used to treat life-threatening situations.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.Classification.ClassIII">
+            <summary>
+            Products that are unlikely to cause any adverse health reaction, but that violate FDA labeling or
+            manufacturing laws. Examples include: a minor container defect and lack of English labeling in a retail
+            food.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Data">
+            <summary>
+            Item matching a UPC lookup query
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.EAN">
+            <summary>
+            EAN-13, 13-digit European Article Number (aka. GTIN-13). This is the unique number we used to identify each
+            item in our database. If it starts with 0, the rest 12-digit is the UPC (aka. UPC-A, GTIN-12), ex.
+            0885909456017.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Title">
+            <summary>
+            Item title
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Description">
+            <summary>
+            Item description with length &lt; 515.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Images">
+            <summary>
+            Collection of image urls.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Offers">
+            <summary>
+            Offers for item provided by merchants.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.ASIN">
+            <summary>
+            Amazon Standard Identification Number (ASIN) is a 10-character alphanumeric unique identifier assigned by
+            Amazon.com and its partners for product identification within the Amazon organization.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.ISBN">
+            <summary>
+            International Standard Book Numbers (ISBN) are numeric commercial book identifiers which are intended to be
+            unique. An ISBN is assigned to each separate edition and variation (except reprintings) of a publication.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Publisher">
+            <summary>
+            Publisher name
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.UPC">
+            <summary>
+            UPC-A, 12-digit Universal Product Code (aka. GTIN-12). If item’s EAN does not start with 0, there is no
+            corresponding UPC-A code, ex. 6009705662678.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Brand">
+            <summary>
+            Brand name or manufacturer name with length &lt; 64.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Model">
+            <summary>
+            Item model number with length &lt; 32.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Color">
+            <summary>
+            Item color with length &lt; 32, ex. for clothing, shoes.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Size">
+            <summary>
+            Item size with length &lt; 32, ex. for clothing, shoes.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Dimension">
+            <summary>
+            Item model number with length &lt; 32.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Weight">
+            <summary>
+            Item weight with length &lt; 16.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.Currency">
+            <summary>
+            Currency of the <see cref="P:Zebra.Savanna.Models.Data.LowestRecordedPrice"/>. Can be "USD", "CAD", "EUR", "GBP", "SEK". Default ""
+            means "USD".
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.LowestRecordedPrice">
+            <summary>
+            Lowest historical price of the item since tracked by our system. Not available for books.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.HighestRecordedPrice">
+            <summary>
+            Highest historical price of the item since tracked by our system. Not available for books.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Data.ELID">
+            <summary>
+            eBay Listing ID, aka. item ID or item number. Item ID is 9 to 12 digits in length. If item is found on
+            eBay.com, you can simply locate the item by http://www.ebay.com/itm/[eLID].
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Detail">
+            <summary>
+            Provides details about the results of an API call.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Detail.ErrorCode">
+            <summary>
+            The error code encountered while invoking the API.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.DeveloperMessage">
+            <summary>
+            Provides information about the results of an API call.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.DeveloperMessage.Fault">
+            <summary>
+            Describes issues encountered while invoking the API.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Device">
+            <summary>
+            Device recall report.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.EventDateTerminated">
+            <summary>
+            Date that FDA determined recall actions were completed and terminated the recall. For details about
+            termination of a recall see http://www.accessdata.fda.gov/scripts/cdrh/cfdocs/cfcfr/cfrsearch.cfm?fr=7.55
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.FirmFEINumber">
+            <summary>
+            Facility identifier assigned to facility by the FDA Office of Regulatory Affairs.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.KNumbers">
+            <summary>
+            FDA-assigned premarket notification number, including leading letters. Leading letters "BK" indicates
+            510(k) clearance, or Premarket Notification, cleared by Center for Biologics Evaluation and Research.
+            Leading letters "DEN" indicates De Novo, or Evaluation of Automatic Class III Designation. Leading letter
+            "K" indicates 510(k) clearance, or Premarket Notification. `Source`: 510(k)
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.OpenFDA">
+            <summary>
+            Information about the recalled medical device.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.OtherSubmissionDescription">
+            <summary>
+            If 510(k) or PMA numbers are not applicable to the device recalled, the recall may contain other regulatory
+            descriptions, such as `exempt`.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.PMANumbers">
+            <summary>
+            FDA-assigned premarket application number, including leading letters. Leading letter "D" indicates Product
+            Development Protocol type of Premarket Approval. Leading letters "BP" indicates Premarket Approval by
+            Center for Biologics Evaluation and Research. Leading letter "H" indicates Humanitarian Device Exemption
+            approval. Leading letter "N" indicates New Drug Application. Early PMAs were approved as NDAs. Leading
+            letter "P" indicates Premarket Approval.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.ProductCode">
+            <summary>
+            A three-letter identifier assigned to a device category. Assignment is based upon the medical device
+            classification designated under 21 CFR Parts 862-892, and the technology and intended use of the device.
+            Occasionally these codes are changed over time.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.ProductResNumber">
+            <summary>
+            The product's number in the Recall Enterprise System.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.ResEventNumber">
+            <summary>
+            A five digit, numerical designation assigned by FDA to a specific recall event used for tracking purposes.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Device.RootCauseDescription">
+            <summary>
+            FDA determined general type of recall cause. Per FDA policy, recall cause determinations are subject to
+            modification up to the point of termination of the recall.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.DeviceClass">
+            <summary>
+            A risk based classification system for all medical devices ((Federal Food, Drug, and Cosmetic Act, section 513)
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.DeviceClass.Class1">
+            <summary>
+            Class I (low to moderate risk): general controls
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.DeviceClass.Class2">
+            <summary>
+            Class II (moderate to high risk): general controls and special controls
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.DeviceClass.Class3">
+            <summary>
+            Class III (high risk): general controls and Premarket Approval (PMA)
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.DeviceClass.U">
+            <summary>
+            Unclassified
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.DeviceClass.N">
+            <summary>
+            Not classified
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.DeviceClass.F">
+            <summary>
+            HDE
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Error`1">
+            <summary>
+            Thrown when a Savanna API call does not succeed.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Error`1.Code">
+            <summary>
+            The status code returned by the API.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Error`1.Info">
+            <summary>
+            Link to a web page providing more information about result of the API call.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Error`1.DeveloperMessage">
+            <summary>
+            Provides information about the result of the API call.
+            </summary>
+        </member>
+        <member name="M:Zebra.Savanna.Models.Error`1.#ctor">
+            <summary>
+            Initializes a new instance of the <see cref="T:Zebra.Savanna.Models.Error`1"/> class.
+            </summary>
+        </member>
+        <member name="M:Zebra.Savanna.Models.Error`1.#ctor(System.String)">
+            <summary>
+            Initializes a new instance of the <see cref="T:Zebra.Savanna.Models.Error`1"/> class with a specified error message.
+            </summary>
+            <param name="message">The message that describes the error.</param>
+        </member>
+        <member name="M:Zebra.Savanna.Models.Error`1.#ctor(System.String,System.Exception)">
+            <summary>
+            Initializes a new instance of the System.Exception class with a specified error message and a reference to
+            the inner exception that is the cause of this exception.
+            </summary>
+            <param name="message">The error message that explains the reason for the exception.</param>
+            <param name="innerException">The exception that is the cause of the current exception, or a null reference
+            if no inner exception is specified.</param>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Fault">
+            <summary>
+            Describes issues encountered while invoking an API.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Fault.FaultString">
+            <summary>
+            The fault that occurred.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Fault.Detail">
+            <summary>
+            Provides details about the results of the API call.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.IResponse">
+            <summary>
+            The result of an API call.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.IResponse.Code">
+            <summary>
+            The status code returned by the API.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Meta">
+            <summary>
+            Includes a disclaimer, a link to the openFDA data license, and information about the results.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Meta.Disclaimer">
+            <summary>
+            Important details notes about openFDA data and limitations of the dataset.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Meta.Terms">
+            <summary>
+            Link to a web page with license terms that govern data within openFDA.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Meta.License">
+            <summary>
+            Link to a web page with the license that governs data within openFDA.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Meta.LastUpdated">
+            <summary>
+            The last date when this openFDA endpoint was updated. Note that this does not correspond to the most recent
+            record for the endpoint or dataset. Rather, it is the last time the openFDA API was itself updated.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Meta.Results">
+            <summary>
+            Information about the results.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.MetaResults">
+            <summary>
+            Information about the results.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.MetaResults.Skip">
+            <summary>
+            Offset (page) of results, defined by the skip query parameter.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.MetaResults.Limit">
+            <summary>
+            Number of records returned, defined by the limit query parameter. If there is no limit parameter, the
+            API returns one result.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.MetaResults.Total">
+            <summary>
+            Total number of records matching the search criteria.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Offer">
+            <summary>
+            Offer for an item provided by a merchant.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Merchant">
+            <summary>
+            Online store name.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Domain">
+            <summary>
+            Online store domain.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Title">
+            <summary>
+            Item name marketed by the merchant.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Currency">
+            <summary>
+            Currency of <see cref="P:Zebra.Savanna.Models.Offer.ListPrice"/> &amp; <see cref="P:Zebra.Savanna.Models.Offer.Price"/>. Can be "USD", "CAD", "EUR", "GBP", "SEK".
+            Default "" means "USD".
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.ListPrice">
+            <summary>
+            Original price from the store.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Price">
+            <summary>
+            Sale price.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Shipping">
+            <summary>
+            "Free Shipping" or other shipping information if not free.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Condition">
+            <summary>
+            "New" or "Used"
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Availability">
+            <summary>
+            Default "" means available or "Out of Stock"
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.Link">
+            <summary>
+            Shop link of the item.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Offer.UpdatedTimestamp">
+            <summary>
+            Unix timestamp of when the offer was last updated.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.OpenFDADevice">
+            <summary>
+            Information about a recalled medical device.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDADevice.DeviceClass">
+            <summary>
+            A risk based classification system for all medical devices (Federal Food, Drug, and Cosmetic Act, section 513).
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDADevice.DeviceName">
+            <summary>
+            This is the proprietary name, or trade name, of the cleared device.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDADevice.FEINumber">
+            <summary>
+            Facility identifier assigned to facility by the FDA Office of Regulatory Affairs.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDADevice.KNumber">
+            <summary>
+            FDA-assigned premarket notification number, including leading letters. Leading letters "BK" indicates
+            510(k) clearance, or Premarket Notification, cleared by Center for Biologics Evaluation and Research.
+            Leading letters "DEN" indicates De Novo, or Evaluation of Automatic Class III Designation. Leading letter
+            "K" indicates 510(k) clearance, or Premarket Notification. `Source`: 510(k)
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDADevice.MedicalSpecialtyDescription">
+            <summary>
+            Regulation Medical Specialty is assigned based on the regulation (e.g. 21 CFR Part 888 is Orthopedic
+            Devices) which is why Class 3 devices lack the "Regulation Medical Specialty" field.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDADevice.RegistrationNumber">
+            <summary>
+            Facility identifier assigned to facility by the FDA Office of Regulatory Affairs.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDADevice.RegulationNumber">
+            <summary>
+            The classification regulation in the Code of Federal Regulations (CFR) under which the device is
+            identified, described, and formally classified (Code of Federal regulations Title 21, 862.00 through
+            892.00). The classification regulation covers various aspects of design, clinical evaluation,
+            manufacturing, packaging, labeling, and postmarket surveillance of the specific medical device.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.OpenFDAProduct">
+            <summary>
+            Information about a recalled food or drug.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.ApplicationNumber">
+            <summary>
+            This corresponds to the NDA, ANDA, or BLA number reported by the labeler for products which have the
+            corresponding Marketing Category designated. If the designated Marketing Category is OTC Monograph Final or
+            OTC Monograph Not Final, then the application number will be the CFR citation corresponding to the
+            appropriate Monograph (e.g. "part 341"). For unapproved drugs, this field will be null.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.BrandName">
+            <summary>
+            Brand or trade name of the drug product.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.GenericName">
+            <summary>
+            Generic name(s) of the drug product.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.IsOriginalPackager">
+            <summary>
+            Whether or not the drug has been repackaged for distribution.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.ManufacturerName">
+            <summary>
+            Name of manufacturer or company that makes this drug product, corresponding to the labeler code segment of
+            the NDC.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.NUI">
+            <summary>
+            Unique identifier applied to a drug concept within the National Drug File Reference Terminology (NDF-RT).
+            https://www.nlm.nih.gov/research/umls/sourcereleasedocs/current/NDFRT/
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.OriginalPackagerProductNDC">
+            <summary>
+            This NDC identifies the original packager.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.PackageNDC">
+            <summary>
+            This number, known as the NDC, identifies the labeler, product, and trade package size. The first segment,
+            the labeler code, is assigned by the FDA. A labeler is any firm that manufactures (including repackers or
+            relabelers), or distributes (under its own name) the drug.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.PharmClassCS">
+            <summary>
+            Chemical structure classification of the drug product’s pharmacologic class. Takes the form of the
+            classification, followed by `[Chemical/Ingredient]` (such as `Thiazides [Chemical/Ingredient]` or
+            `Antibodies, Monoclonal [Chemical/Ingredient].
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.PharmClassEPC">
+            <summary>
+            Established pharmacologic class associated with an approved indication of an active moiety (generic drug)
+            that the FDA has determined to be scientifically valid and clinically meaningful. Takes the form of the
+            pharmacologic class, followed by `[EPC]` (such as `Thiazide Diuretic [EPC]` or `Tumor Necrosis Factor
+            Blocker [EPC]`.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.PharmClassPE">
+            <summary>
+            Physiologic effect or pharmacodynamic effect—tissue, organ, or organ system level functional activity of
+            the drug’s established pharmacologic class. Takes the form of the effect, followed by `[PE]` (such as
+            `Increased Diuresis [PE]` or `Decreased Cytokine Activity [PE]`.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.pharm_class_moa">
+            <summary>
+            Mechanism of action of the drug—molecular, subcellular, or cellular functional activity—of the drug’s
+            established pharmacologic class. Takes the form of the mechanism of action, followed by `[MoA]` (such as
+            `Calcium Channel Antagonists [MoA]` or `Tumor Necrosis Factor Receptor Blocking Activity [MoA]`.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.ProductNDC">
+            <summary>
+            The labeler manufacturer code and product code segments of the NDC number, separated by a hyphen.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.ProductType">
+            <summary>
+            Type of drug product.
+            http://www.fda.gov/ForIndustry/DataStandards/StructuredProductLabeling/ucm162063.htm
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.Route">
+            <summary>
+            The route of administation of the drug product.
+            http://www.fda.gov/ForIndustry/DataStandards/StructuredProductLabeling/ucm162034.htm
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.RxCUI">
+            <summary>
+            The RxNorm Concept Unique Identifier. RxCUI is a unique number that describes a semantic concept about the
+            drug product, including its ingredients, strength, and dose forms.
+            https://www.nlm.nih.gov/research/umls/rxnorm/docs/2012/rxnorm_doco_full_2012-3.html
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.SPLId">
+            <summary>
+            Unique identifier for a particular version of a Structured Product Label for a product. Also referred to as
+            the document ID.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.SPLSetId">
+            <summary>
+            Unique identifier for the Structured Product Label for a product, which is stable across versions of the
+            label. Also referred to as the set ID.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.SubstanceName">
+            <summary>
+            The list of active ingredients of a drug product.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.UnII">
+            <summary>
+            Unique Ingredient Identifier, which is a non-proprietary, free, unique, unambiguous, non-semantic,
+            alphanumeric identifier based on a substance’s molecular structure and/or descriptive information.
+            http://fdasis.nlm.nih.gov/srs/srs.jsp
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.OpenFDAProduct.UPC">
+            <summary>
+            Universal Product Code
+            https://en.wikipedia.org/wiki/Universal_Product_Code
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Product">
+            <summary>
+            Product recall report.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.Address1">
+            <summary>
+            The first address line of the recalling firm.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.Address2">
+            <summary>
+            The second address line of the recalling firm.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.CenterClassificationDate">
+            <summary>
+            The date that FDA classified the recalled products as Class I, II, or III.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.City">
+            <summary>
+            The city in which the recalling firm is located.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.Classification">
+            <summary>
+            Numerical designation (I, II, or III) that is assigned by FDA to a particular product recall that indicates
+            the relative degree of health hazard.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.CodeInfo">
+            <summary>
+            A list of all lot and/or serial numbers, product numbers, packer or manufacturer numbers, sell or use by
+            dates, etc., which appear on the product or its labeling.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.Country">
+            <summary>
+            The country in which the recalling firm is located.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.DistributionPattern">
+            <summary>
+            General area of initial distribution such as, "Distributors in 6 states: NY, VA, TX, GA, FL and MA; the
+            Virgin Islands; Canada and Japan". The term "nationwide" is defined to mean the fifty states or a
+            significant portion. Note that subsequent distribution by the consignees to other parties may not be
+            included.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.EventID">
+            <summary>
+            A numerical designation assigned by FDA to a specific recall event used for tracking purposes.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.InitialFirmNotification">
+            <summary>
+            The method(s) by which the firm initially notified the public or their consignees of a recall. A consignee
+            is a person or firm named in a bill of lading to whom or to whose order the product has or will be
+            delivered.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.MoreCodeInfo">
+            <summary>
+            A list of additional lot and/or serial numbers, product numbers, expiration dates, sell or use by dates,
+            etc., which appear on the product or its labeling.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.OpenFDA">
+            <summary>
+            Information about the recalled product.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.PostalCode">
+            <summary>
+            The postal code in which the recalling firm is located.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.ProductCode">
+            <summary>
+            A three-letter identifier assigned to a product category. Assignment is based upon the product
+            classification designated under 21 CFR Parts 862-892, and the technology and intended use of the product.
+            Occasionally these codes are changed over time.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.ProductDescription">
+            <summary>
+            Brief description of the product being recalled.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.ProductQuantity">
+            <summary>
+            The amount of defective product subject to recall.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.ProductType">
+            <summary>
+            The type of product being recalled. For drug queries, this will always be `Drugs`.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.ReasonForRecall">
+            <summary>
+            Information describing how the product is defective and violates the FD&amp;C Act or related statutes.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.RecallInitiationDate">
+            <summary>
+            Date that the firm first began notifying the public or their consignees of the recall.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.RecallNumber">
+            <summary>
+            A numerical designation assigned by FDA to a specific recall event used for tracking purposes.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.RecallingFirm">
+            <summary>
+            The firm that initiates a recall or, in the case of an FDA requested recall or FDA mandated recall, the
+            firm that has primary responsibility for the manufacture and (or) marketing of the product to be recalled.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.ReportDate">
+            <summary>
+            Date that the FDA issued the enforcement report for the product recall.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.State">
+            <summary>
+            The U.S. state in which the recalling firm is located.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.Status">
+            <summary>
+            The status of a recall  (pending, ongoing, completed, or terminated).
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.TerminationDate">
+            <summary>
+            Date that the FDA terminated the enforcement report for the product recall.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Product.VoluntaryMandated">
+            <summary>
+            Describes who initiated the recall. Recalls are almost always voluntary, meaning initiated by a firm. A
+            recall is deemed voluntary when the firm voluntarily removes or corrects marketed products or the FDA
+            requests the marketed products be removed or corrected. A recall is mandated when the firm was ordered by
+            the FDA to remove or correct the marketed products, under section 518(e) of the FD&amp;C Act, National
+            Childhood Vaccine Injury Act of 1986, 21 CFR 1271.440, Infant Formula Act of 1980 and its 1986 amendments,
+            or the Food Safety Modernization Act (FSMA).
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.ProductType">
+            <summary>
+            The type of product being recalled (drug, device, or food).
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.ProductType.Drugs">
+            <summary>
+            The recalled product is a drug product.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.ProductType.Devices">
+            <summary>
+            The recalled product is a device product.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.ProductType.Food">
+            <summary>
+            The recalled product is a food product.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Recall`1">
+            <summary>
+            Provides public FDA data about nouns like drugs, devices, and foods.
+            </summary>
+            <typeparam name="T"></typeparam>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Recall`1.Meta">
+            <summary>
+            Includes a disclaimer, a link to the openFDA data license, and information about the results that follow.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Recall`1.Results">
+            <summary>
+            A <see cref="T:System.Collections.Generic.List`1" /> of matching records.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Status">
+            <summary>
+            The status of a recall (pending, ongoing, completed, or terminated).
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.Status.Ongoing">
+            <summary>
+            A recall which is currently in progress.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.Status.Completed">
+            <summary>
+            The recall action reaches the point at which the firm has actually retrieved and impounded all outstanding
+            product that could reasonably be expected to be recovered, or has completed all product corrections.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.Status.Terminated">
+            <summary>
+            FDA has determined that all reasonable efforts have been made to remove or correct the violative product in
+            accordance with the recall strategy, and proper disposition has been made according to the degree of
+            hazard.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Models.Status.Pending">
+            <summary>
+            Actions that have been determined to be recalls, but that remain in the process of being classified.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Rotation">
+            <summary>
+            Describes barcode image orientation.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Rotation.Normal">
+            <summary>
+            No rotation
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Rotation.Clockwise">
+            <summary>
+            Clockwise 90 degree rotation
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Rotation.Inverted">
+            <summary>
+            Inverted 180 degree rotation
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Rotation.Counterclockwise">
+            <summary>
+            Counter-clockwise 90 degree rotation
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.SavannaAPI">
+            <summary>
+            Provides common functionality for access to Savanna APIs.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.SavannaAPI.APIKey">
+            <summary>
+            Your Zebra Savanna application key.
+            </summary>
+        </member>
+        <member name="M:Zebra.Savanna.SavannaAPI.CallService(System.String)">
+            <summary>
+            Retrieve a json string from a Barcode Intelligence Tools service.
+            </summary>
+            <param name="api">The API path of the tool being accessed.</param>
+            <returns>A <see cref="T:System.String"/> containing json returned by the API call.</returns>
+        </member>
+        <member name="M:Zebra.Savanna.SavannaAPI.CallServiceBytes(System.String)">
+            <summary>
+            Retrieve raw bytes from a Barcode Intelligence Tools service.
+            </summary>
+            <param name="api">The API path of the tool being accessed.</param>
+            <returns>A <see cref="T:byte[]"/> representation of the API call result.</returns>
+        </member>
+        <member name="M:Zebra.Savanna.SavannaAPI.CheckErrors(System.String)">
+            <summary>
+            Throw a deserialized error message from Savanna API response.
+            </summary>
+            <param name="json">The json response from a Savanna service.</param>
+        </member>
+        <member name="T:Zebra.Savanna.Symbology">
+            <summary>
+            Describes barcode type.
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.auspost">
+            <summary>
+            AusPost 4 State Customer Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.azteccode">
+            <summary>
+            Aztec Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.azteccodecompact">
+            <summary>
+            Compact Aztec Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.aztecrune">
+            <summary>
+            Aztec Runes
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.bc412">
+            <summary>
+            BC412
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.channelcode">
+            <summary>
+            Channel Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.codablockf">
+            <summary>
+            Codablock F
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code11">
+            <summary>
+            Code 11
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code128">
+            <summary>
+            Code 128
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code16k">
+            <summary>
+            Code 16K
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code2of5">
+            <summary>
+            Code 25
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code32">
+            <summary>
+            Italian Pharmacode
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code39">
+            <summary>
+            Code 39
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code39ext">
+            <summary>
+            Code 39 Extended
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code49">
+            <summary>
+            Code 49
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code93">
+            <summary>
+            Code 93
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.code93ext">
+            <summary>
+            Code 93 Extended
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.codeone">
+            <summary>
+            Code One
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.coop2of5">
+            <summary>
+            COOP 2 of 5
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.daft">
+            <summary>
+            Custom 4 state symbology
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarexpanded">
+            <summary>
+            GS1 DataBar Expanded
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarexpandedcomposite">
+            <summary>
+            GS1 DataBar Expanded Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarexpandedstacked">
+            <summary>
+            GS1 DataBar Expanded Stacked
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarexpandedstackedcomposite">
+            <summary>
+            GS1 DataBar Expanded Stacked Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarlimited">
+            <summary>
+            GS1 DataBar Limited
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarlimitedcomposite">
+            <summary>
+            GS1 DataBar Limited Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databaromni">
+            <summary>
+            GS1 DataBar Omnidirectional
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databaromnicomposite">
+            <summary>
+            GS1 DataBar Omnidirectional Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarstacked">
+            <summary>
+            GS1 DataBar Stacked
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarstackedcomposite">
+            <summary>
+            GS1 DataBar Stacked Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarstackedomni">
+            <summary>
+            GS1 DataBar Stacked Omnidirectional
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databarstackedomnicomposite">
+            <summary>
+            GS1 DataBar Stacked Omnidirectional Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databartruncated">
+            <summary>
+            GS1 DataBar Truncated
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.databartruncatedcomposite">
+            <summary>
+            GS1 DataBar Truncated Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.datalogic2of5">
+            <summary>
+            Datalogic 2 of 5
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.datamatrix">
+            <summary>
+            Data Matrix
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.datamatrixrectangular">
+            <summary>
+            Data Matrix Rectangular
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.dotcode">
+            <summary>
+            DotCode
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ean13">
+            <summary>
+            EAN-13
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ean13composite">
+            <summary>
+            EAN-13 Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ean14">
+            <summary>
+            GS1-14
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ean2">
+            <summary>
+            EAN-2 (2 digit addon)
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ean5">
+            <summary>
+            EAN-5 (5 digit addon)
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ean8">
+            <summary>
+            EAN-8
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ean8composite">
+            <summary>
+            EAN-8 Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.flattermarken">
+            <summary>
+            Flattermarken
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.gs1_128">
+            <summary>
+            GS1-128
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.gs1_128composite">
+            <summary>
+            GS1-128 Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.gs1_cc">
+            <summary>
+            GS1 Composite 2D Component
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.gs1datamatrix">
+            <summary>
+            GS1 Data Matrix
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.gs1datamatrixrectangular">
+            <summary>
+            GS1 Data Matrix Rectangular
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.gs1northamericancoupon">
+            <summary>
+            GS1 North American Coupon
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.gs1qrcode">
+            <summary>
+            GS1 QR Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hanxin">
+            <summary>
+            Han Xin Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibcazteccode">
+            <summary>
+            HIBC Aztec Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibccodablockf">
+            <summary>
+            HIBC Codablock F
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibccode128">
+            <summary>
+            HIBC Code 128
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibccode39">
+            <summary>
+            HIBC Code 39
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibcdatamatrix">
+            <summary>
+            HIBC Data Matrix
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibcdatamatrixrectangular">
+            <summary>
+            HIBC Data Matrix Rectangular
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibcmicropdf417">
+            <summary>
+            HIBC MicroPDF417
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibcpdf417">
+            <summary>
+            HIBC PDF417
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.hibcqrcode">
+            <summary>
+            HIBC QR Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.iata2of5">
+            <summary>
+            IATA 2 of 5
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.identcode">
+            <summary>
+            Deutsche Post Identcode
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.industrial2of5">
+            <summary>
+            Industrial 2 of 5
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.interleaved2of5">
+            <summary>
+            Interleaved 2 of 5 (ITF)
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.isbn">
+            <summary>
+            ISBN
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ismn">
+            <summary>
+            ISMN
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.issn">
+            <summary>
+            ISSN
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.itf14">
+            <summary>
+            ITF-14
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.japanpost">
+            <summary>
+            Japan Post 4 State Customer Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.kix">
+            <summary>
+            Royal Dutch TPG Post KIX
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.leitcode">
+            <summary>
+            Deutsche Post Leitcode
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.matrix2of5">
+            <summary>
+            Matrix 2 of 5
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.maxicode">
+            <summary>
+            MaxiCode
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.micropdf417">
+            <summary>
+            MicroPDF417
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.microqrcode">
+            <summary>
+            Micro QR Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.msi">
+            <summary>
+            MSI Modified Plessey
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.onecode">
+            <summary>
+            USPS Intelligent Mail
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.pdf417">
+            <summary>
+            PDF417
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.pdf417compact">
+            <summary>
+            Compact PDF417
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.pharmacode2">
+            <summary>
+            Two-track Pharmacode
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.pharmacode">
+            <summary>
+            Pharmaceutical Binary Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.planet">
+            <summary>
+            USPS PLANET
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.plessey">
+            <summary>
+            Plessey UK
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.posicode">
+            <summary>
+            PosiCode
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.postnet">
+            <summary>
+            USPS POSTNET
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.pzn">
+            <summary>
+            Pharmazentralnummer (PZN)
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.qrcode">
+            <summary>
+            QR Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.rationalizedCodabar">
+            <summary>
+            Codabar
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.raw">
+            <summary>
+            Custom 1D symbology
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.royalmail">
+            <summary>
+            Royal Mail 4 State Customer Code
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.sscc18">
+            <summary>
+            SSCC-18
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.symbol">
+            <summary>
+            Miscellaneous symbols
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.telepen">
+            <summary>
+            Telepen
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.telepennumeric">
+            <summary>
+            Telepen Numeric
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.ultracode">
+            <summary>
+            Ultracode
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.upca">
+            <summary>
+            UPC-A
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.upcacomposite">
+            <summary>
+            UPC-A Composite
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.upce">
+            <summary>
+            UPC-E
+            </summary>
+        </member>
+        <member name="F:Zebra.Savanna.Symbology.upcecomposite">
+            <summary>
+            UPC-E Composite
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.UPCLookup">
+            <summary>
+            Provides access to the Savanna UPC Lookup API.
+            </summary>
+        </member>
+        <member name="M:Zebra.Savanna.UPCLookup.LookupAsync(System.String)">
+            <summary>
+            Retrieves product information in JSON format for a provided UPC code
+            </summary>
+            <param name="upc">UPC Code</param>
+            <returns>A <see cref="T:System.String"/> containing product information for the provided UPC</returns>
+        </member>
+        <member name="M:Zebra.Savanna.UPCLookup.DeserializeLookupAsync(System.String)">
+            <summary>
+            Retrieves product information in JSON format for a provided UPC code
+            </summary>
+            <param name="upc">UPC Code</param>
+            <returns>A <see cref="T:Zebra.Savanna.Models.BarcodeData"/> containing product information for the provided UPC</returns>
+        </member>
+    </members>
+</doc>
