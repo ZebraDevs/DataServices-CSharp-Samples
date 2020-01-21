@@ -99,7 +99,7 @@
             </summary>
             <param name="search">A simple one word search string</param>
             <param name="limit"> Maximum number of records to return</param>
-            <returns> A <see cref="T:System.String"/> containing results from the device recall search, if any</returns>
+            <returns> A <see cref="T:Zebra.Savanna.Models.Recall`1"/> containing results from the device recall search, if any</returns>
         </member>
         <member name="M:Zebra.Savanna.FDARecall.DeserializeDrugSearchAsync(System.String,System.Int32)">
             <summary>
@@ -107,7 +107,7 @@
             </summary>
             <param name="search"> A simple one word search string</param>
             <param name="limit">Maximum number of records to return</param>
-            <returns>A <see cref="T:System.String"/> containing results from the drug recall search, if any</returns>
+            <returns>A <see cref="T:Zebra.Savanna.Models.Recall`1"/> containing results from the drug recall search, if any</returns>
         </member>
         <member name="M:Zebra.Savanna.FDARecall.DeserializeFoodUpcAsync(System.String,System.Int32)">
             <summary>
@@ -115,7 +115,7 @@
             </summary>
             <param name="upc">A valid UPC code for a food item</param>
             <param name="limit">Maximum number of records to return (maximum 99)</param>
-            <returns>A <see cref="T:System.String"/> containing results from the food recall lookup, if any</returns>
+            <returns>A <see cref="T:Zebra.Savanna.Models.Recall`1"/> containing results from the food recall lookup, if any</returns>
         </member>
         <member name="M:Zebra.Savanna.FDARecall.DeserializeDrugUpcAsync(System.String,System.Int32)">
             <summary>
@@ -123,7 +123,7 @@
             </summary>
             <param name="upc">Value</param>
             <param name="limit">Maximum number of records to return</param>
-            <returns>A <see cref="T:System.String"/> containing results from the drug recall lookup, if any</returns>
+            <returns>A <see cref="T:Zebra.Savanna.Models.Recall`1"/> containing results from the drug recall lookup, if any</returns>
         </member>
         <member name="T:Zebra.Savanna.Models.APIEnumConverter">
             <summary>
@@ -283,7 +283,7 @@
         </member>
         <member name="P:Zebra.Savanna.Models.Data.Dimension">
             <summary>
-            Item model number with length &lt; 32.
+            Item dimension measurements.
             </summary>
         </member>
         <member name="P:Zebra.Savanna.Models.Data.Weight">
@@ -755,7 +755,7 @@
         </member>
         <member name="P:Zebra.Savanna.Models.OpenFDAProduct.Route">
             <summary>
-            The route of administation of the drug product.
+            The route of administration of the drug product.
             http://www.fda.gov/ForIndustry/DataStandards/StructuredProductLabeling/ucm162034.htm
             </summary>
         </member>
