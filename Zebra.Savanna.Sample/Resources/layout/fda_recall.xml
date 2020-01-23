@@ -12,9 +12,12 @@
         android:hint="@string/fda_scan" />
 
     <Button
+        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/fdaSearch"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:padding="18dp"
         android:text="@string/fdaSearch" />
 
     <TextView

@@ -5,26 +5,32 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <EditText
-        android:id="@+id/barcodeText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:ems="10"
-        android:gravity="start|top"
-        android:hint="@string/create_hint"
-        android:inputType="textMultiLine"
-        android:lines="5" />
-
     <Spinner
         android:id="@+id/barcodeTypes"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 
+    <CheckBox
+        android:id="@+id/includeText"
+        android:text="@string/include_text"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/barcodeText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="@string/create_hint"
+        android:inputType="textMultiLine" />
+
     <Button
+        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/createBarcode"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/create_barcode" />
+        android:textSize="18sp"
+        android:padding="18dp"
+        android:text="@string/generate_barcode" />
 
     <FrameLayout
         android:layout_width="match_parent"

@@ -12,10 +12,13 @@
         android:hint="@string/scan" />
 
     <Button
+        style="@style/Widget.AppCompat.Button.Colored"
         android:id="@+id/upc_lookup"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="@string/upc_lookup" />
+        android:textSize="18sp"
+        android:padding="18dp"
+        android:text="@string/lookup_upc" />
 
     <TextView
         android:id="@+id/resultData"
