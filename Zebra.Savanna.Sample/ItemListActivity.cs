@@ -179,7 +179,8 @@ namespace Zebra.Savanna.Sample
             public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
             {
                 ((ViewHolder)holder).ContentView.Text = _values[position].Content;
-                ((ViewHolder)holder).ContentView.SetCompoundDrawables(_parentActivity.GetDrawable(_values[position].Icon),null,null,null);
+                ((ViewHolder)holder).ContentView.SetCompoundDrawablesWithIntrinsicBounds(_parentActivity.GetDrawable(_values[position].Icon), null, null, null);
+                ((ViewHolder)holder).ContentView.CompoundDrawablePadding = 16;
 
                 holder.ItemView.Tag = _values[position];
                 holder.ItemView.SetOnClickListener(this);
