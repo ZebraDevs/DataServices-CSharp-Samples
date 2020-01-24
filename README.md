@@ -15,7 +15,7 @@ Android Device Setup
 
 Create a DataWedge profile:
 
-* Associate the app com.zebra.barcodeintelligencetools
+* Associate the app com.zebra.savanna.sample
 * Configure scanner settings to decode desired barcode types
 * Enable intent output
 * Set intent action to `com.zebra.SCAN`
