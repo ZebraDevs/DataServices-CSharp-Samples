@@ -17,7 +17,6 @@ namespace Zebra.Savanna.Sample
     /// in a <see cref="ListItemActivity" />
     /// </summary>
     [Activity(Name = "com.zebra.barcodeintelligencetools.ItemDetailActivity",
-        Label = "@string/title_item_detail",
         ParentActivity = typeof(ItemListActivity),
         Theme = "@style/AppTheme.NoActionBar")]
     [MetaData("android.support.PARENT_ACTIVITY",

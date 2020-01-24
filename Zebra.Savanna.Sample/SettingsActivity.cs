@@ -1,5 +1,6 @@
 using Android.App;
 using Android.Content;
+using Android.Content.PM;
 using Android.OS;
 using Android.Views;
 
@@ -9,6 +10,7 @@ using AndroidX.Preference;
 namespace Zebra.Savanna.Sample
 {
     [Activity(Name = "com.zebra.barcodeintelligencetools.SettingsActivity",
+        ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation | ConfigChanges.ScreenSize,
         Label = "@string/title_activity_settings")]
     public class SettingsActivity : AppCompatActivity
     {
