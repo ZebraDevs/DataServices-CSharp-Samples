@@ -178,8 +178,8 @@ namespace Zebra.Savanna.Sample
 
             public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
             {
-                ((ViewHolder)holder).IconView.SetImageResource(_values[position].Icon);
                 ((ViewHolder)holder).ContentView.Text = _values[position].Content;
+                ((ViewHolder)holder).ContentView.SetCompoundDrawables(_parentActivity.GetDrawable(_values[position].Icon),null,null,null);
 
                 holder.ItemView.Tag = _values[position];
                 holder.ItemView.SetOnClickListener(this);
@@ -189,12 +189,10 @@ namespace Zebra.Savanna.Sample
 
             public class ViewHolder : RecyclerView.ViewHolder
             {
-                public readonly ImageView IconView;
                 public readonly TextView ContentView;
 
                 public ViewHolder(View view) : base(view)
                 {
-                    IconView = view.FindViewById<ImageView>(Resource.Id.icon);
                     ContentView = view.FindViewById<TextView>(Resource.Id.content);
                 }
             }
