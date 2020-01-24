@@ -5,6 +5,7 @@ using Android.Views;
 
 using AndroidX.AppCompat.App;
 using AndroidX.AppCompat.Widget;
+using Google.Android.Material.AppBar;
 using System;
 
 namespace Zebra.Savanna.Sample
@@ -42,7 +43,30 @@ namespace Zebra.Savanna.Sample
         {
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_item_detail);
-            Toolbar toolbar = FindViewById<Toolbar>(Resource.Id.detail_toolbar);
+            var toolbar = FindViewById<Toolbar>(Resource.Id.detail_toolbar);
+            var toolbarLayout = FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
+            var itemId = Intent.GetStringExtra(ItemDetailFragment.ArgItemId);
+            switch (itemId)
+            {
+                case "1":
+                    Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorCreateBarcodeDark));
+                    toolbar.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorCreateBarcode));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    break;
+                case "2":
+                    Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorFdaRecallDark));
+                    toolbar.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorFdaRecall));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    break;
+                case "3":
+                    Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorUpcLookupDark));
+                    toolbar.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorUpcLookup));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    break;
+            }
             SetSupportActionBar(toolbar);
 
             // Show the Up button in the action bar.

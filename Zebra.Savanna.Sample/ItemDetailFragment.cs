@@ -7,7 +7,6 @@ using Android.Widget;
 using AndroidX.Fragment.App;
 using Zebra.Savanna.Sample.API;
 using Google.Android.Material.AppBar;
-using Zebra.Savanna;
 using Zebra.Savanna.Models;
 using System;
 using System.Linq;
@@ -39,9 +38,7 @@ namespace Zebra.Savanna.Sample
         /// Mandatory empty constructor for the fragment manager to instantiate the
         /// fragment (e.g. upon screen orientation changes).
         /// </summary>
-        public ItemDetailFragment()
-        {
-        }
+        public ItemDetailFragment() { }
 
         /// <summary>
         /// Handle a response from Zebra Savanna APIs
@@ -178,18 +175,18 @@ namespace Zebra.Savanna.Sample
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                 _item = APIContent.Items[key];
-
-                var activity = Activity;
-                var appBarLayout = activity?.FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
-                if (appBarLayout != null)
-                {
-                    appBarLayout.SetTitle(_item.Content);
-                }
             }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
+            var activity = Activity;
+            var appBarLayout = activity?.FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
+            if (appBarLayout != null)
+            {
+                appBarLayout.SetTitle(_item.Content);
+            }
+
             var root = (ViewGroup)inflater.Inflate(Resource.Layout.item_detail, container, false);
             var sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(Context);
 
@@ -273,11 +270,12 @@ namespace Zebra.Savanna.Sample
                     case "1":
                         EditText barcodeText = root.FindViewById<EditText>(Resource.Id.barcodeText);
                         Spinner barcodeType = root.FindViewById<Spinner>(Resource.Id.barcodeTypes);
+                        CheckBox includeText = root.FindViewById<CheckBox>(Resource.Id.includeText);
                         var symbology = Enum.Parse<Symbology>(barcodeType.SelectedItem.ToString().Replace('-', '_'));
 
                         // Call to external Zebra Create Barcode API
-                        var barcodeBytes = await CreateBarcode.CreateAsync(symbology, barcodeText.Text, ItemListActivity.Density, Rotation.Normal, true);
-                       
+                        var barcodeBytes = await CreateBarcode.CreateAsync(symbology, barcodeText.Text, ItemListActivity.Density, Rotation.Normal, includeText.Checked);
+
                         OnPostExecute(barcodeBytes);
                         return;
                     case "2":
@@ -293,10 +291,18 @@ namespace Zebra.Savanna.Sample
                         {
                             OnPostExecute(e);
                         }
-                        // Call to external Zebra FDA Drug Recall Search API
-                        var drugSearchJson = await FDARecall.DrugSearchAsync(searchText.Text);
 
-                        OnPostExecute(drugSearchJson);
+                        try
+                        {
+                            // Call to external Zebra FDA Drug Recall Search API
+                            var drugSearchJson = await FDARecall.DrugSearchAsync(searchText.Text);
+
+                            OnPostExecute(drugSearchJson);
+                        }
+                        catch (Exception e)
+                        {
+                            OnPostExecute(e);
+                        }
                         return;
                     case "3":
                         EditText lookupText = root.FindViewById<EditText>(Resource.Id.upc);
