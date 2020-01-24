@@ -64,6 +64,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="API\APIContent.cs" />
+    <Compile Include="API\ApiItem.cs" />
     <Compile Include="IScanReceiver.cs" />
     <Compile Include="ItemDetailActivity.cs" />
     <Compile Include="ItemDetailFragment.cs" />

@@ -26,6 +26,7 @@ namespace Zebra.Savanna.Sample
     public class ItemListActivity : AppCompatActivity, IScanReceiver
     {
         public static int Density { get; set; }
+        internal static APIContent _content;
 
         /// <summary>
         /// Whether or not the activity is in two-pane mode, i.e. running on a tablet device.
@@ -50,10 +51,17 @@ namespace Zebra.Savanna.Sample
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_item_list);
 
-            APIContent.Items.Clear();
-            APIContent.AddItem(new ApiItem("1", GetString(Resource.String.create_barcode), GetString(Resource.String.create_barcode_details)));
-            APIContent.AddItem(new ApiItem("2", GetString(Resource.String.fda_recall), GetString(Resource.String.fda_recall_details)));
-            APIContent.AddItem(new ApiItem("3", GetString(Resource.String.upc_lookup), GetString(Resource.String.upc_lookup_details)));
+            if (_content == null)
+            {
+                _content = new APIContent();
+            }
+            else
+            {
+                _content.Clear();
+            }
+            _content.AddItem(GetString(Resource.String.create_barcode), GetString(Resource.String.create_barcode_details), Resource.Drawable.ic_createbarcode);
+            _content.AddItem(GetString(Resource.String.fda_recall), GetString(Resource.String.fda_recall_details), Resource.Drawable.ic_fdarecall);
+            _content.AddItem(GetString(Resource.String.upc_lookup), GetString(Resource.String.upc_lookup_details), Resource.Drawable.ic_upclookup);
 
             var toolbar = FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.toolbar);
             SetSupportActionBar(toolbar);
@@ -119,7 +127,7 @@ namespace Zebra.Savanna.Sample
 
         private void SetupRecyclerView(RecyclerView recyclerView)
         {
-            var items = new List<ApiItem>(APIContent.Items.Values);
+            var items = new List<ApiItem>(_content.Values);
             recyclerView.SetAdapter(new SimpleItemRecyclerViewAdapter(this, items, _twoPane));
         }
 
@@ -170,7 +178,7 @@ namespace Zebra.Savanna.Sample
 
             public override void OnBindViewHolder(RecyclerView.ViewHolder holder, int position)
             {
-                ((ViewHolder)holder).IdView.Text = _values[position].Id;
+                ((ViewHolder)holder).IconView.SetImageResource(_values[position].Icon);
                 ((ViewHolder)holder).ContentView.Text = _values[position].Content;
 
                 holder.ItemView.Tag = _values[position];
@@ -181,12 +189,12 @@ namespace Zebra.Savanna.Sample
 
             public class ViewHolder : RecyclerView.ViewHolder
             {
-                public readonly TextView IdView;
+                public readonly ImageView IconView;
                 public readonly TextView ContentView;
 
                 public ViewHolder(View view) : base(view)
                 {
-                    IdView = view.FindViewById<TextView>(Resource.Id.id_text);
+                    IconView = view.FindViewById<ImageView>(Resource.Id.icon);
                     ContentView = view.FindViewById<TextView>(Resource.Id.content);
                 }
             }

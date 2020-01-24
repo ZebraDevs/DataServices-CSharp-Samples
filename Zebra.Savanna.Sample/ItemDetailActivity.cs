@@ -24,7 +24,6 @@ namespace Zebra.Savanna.Sample
         Value ="com.zebra.barcodeintelligencetools.ItemListActivity")]
     public class ItemDetailActivity : AppCompatActivity, IScanReceiver
     {
-
         //
         // After registering the broadcast receiver, the next step (below) is to define it.
         // Here it's done in the MainActivity.cs, but also can be handled by a separate class.
