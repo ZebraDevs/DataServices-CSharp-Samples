@@ -3,13 +3,14 @@ using Android.Graphics;
 using Android.OS;
 using Android.Preferences;
 using Android.Views;
-using Android.Widget;
 using AndroidX.Fragment.App;
 using Zebra.Savanna.Sample.API;
 using Google.Android.Material.AppBar;
 using Zebra.Savanna.Models;
 using System;
 using System.Linq;
+using Android.Widget;
+using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
 
 namespace Zebra.Savanna.Sample
 {
@@ -160,6 +161,7 @@ namespace Zebra.Savanna.Sample
         {
             base.OnCreate(savedInstanceState);
             Instance = this;
+
             Bundle args = Arguments;
             if (args != null && args.ContainsKey(ArgItemId))
             {
@@ -175,6 +177,30 @@ namespace Zebra.Savanna.Sample
                 // arguments. In a real-world scenario, use a Loader
                 // to load content from a content provider.
                 _item = ItemListActivity._content[key];
+            }
+
+            var toolbar = Activity.FindViewById<Toolbar>(Resource.Id.detail_toolbar);
+            var toolbarLayout = Activity.FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
+            switch (_item.Id)
+            {
+                case "1":
+                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorCreateBarcodeDark));
+                    toolbar.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorCreateBarcode));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    break;
+                case "2":
+                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorFdaRecallDark));
+                    toolbar.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorFdaRecall));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    break;
+                case "3":
+                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorUpcLookupDark));
+                    toolbar.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorUpcLookup));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    break;
             }
         }
 

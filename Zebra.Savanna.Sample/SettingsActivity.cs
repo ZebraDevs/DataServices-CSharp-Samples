@@ -9,7 +9,7 @@ using AndroidX.Preference;
 
 namespace Zebra.Savanna.Sample
 {
-    [Activity(Name = "com.zebra.barcodeintelligencetools.SettingsActivity",
+    [Activity(Name = "com.zebra.savanna.sample.SettingsActivity",
         ConfigurationChanges = ConfigChanges.KeyboardHidden | ConfigChanges.Orientation | ConfigChanges.ScreenSize,
         Label = "@string/title_activity_settings")]
     public class SettingsActivity : AppCompatActivity

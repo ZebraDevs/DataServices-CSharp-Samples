@@ -20,7 +20,7 @@ namespace Zebra.Savanna.Sample
     /// item details side-by-side using two vertical panes.
     /// </summary>
     [Activity(MainLauncher = true,
-        Name = "com.zebra.barcodeintelligencetools.ItemListActivity",
+        Name = "com.zebra.savanna.sample.ItemListActivity",
         Label = "@string/app_name",
         Theme = "@style/AppTheme.NoActionBar")]
     public class ItemListActivity : AppCompatActivity, IScanReceiver
@@ -180,7 +180,7 @@ namespace Zebra.Savanna.Sample
             {
                 ((ViewHolder)holder).ContentView.Text = _values[position].Content;
                 ((ViewHolder)holder).ContentView.SetCompoundDrawablesWithIntrinsicBounds(_parentActivity.GetDrawable(_values[position].Icon), null, null, null);
-                ((ViewHolder)holder).ContentView.CompoundDrawablePadding = 16;
+                ((ViewHolder)holder).ContentView.CompoundDrawablePadding = 32;
 
                 holder.ItemView.Tag = _values[position];
                 holder.ItemView.SetOnClickListener(this);

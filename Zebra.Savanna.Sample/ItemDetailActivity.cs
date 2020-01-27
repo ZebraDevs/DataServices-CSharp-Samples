@@ -16,11 +16,11 @@ namespace Zebra.Savanna.Sample
     /// item details are presented side-by-side with a list of items
     /// in a <see cref="ListItemActivity" />
     /// </summary>
-    [Activity(Name = "com.zebra.barcodeintelligencetools.ItemDetailActivity",
+    [Activity(Name = "com.zebra.savanna.sample.ItemDetailActivity",
         ParentActivity = typeof(ItemListActivity),
         Theme = "@style/AppTheme.NoActionBar")]
     [MetaData("android.support.PARENT_ACTIVITY",
-        Value ="com.zebra.barcodeintelligencetools.ItemListActivity")]
+        Value ="com.zebra.savanna.sample.ItemListActivity")]
     public class ItemDetailActivity : AppCompatActivity, IScanReceiver
     {
         //
@@ -42,29 +42,6 @@ namespace Zebra.Savanna.Sample
             base.OnCreate(savedInstanceState);
             SetContentView(Resource.Layout.activity_item_detail);
             var toolbar = FindViewById<Toolbar>(Resource.Id.detail_toolbar);
-            var toolbarLayout = FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
-            var itemId = Intent.GetStringExtra(ItemDetailFragment.ArgItemId);
-            switch (itemId)
-            {
-                case "1":
-                    Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorCreateBarcodeDark));
-                    toolbar.SetBackgroundResource(Resource.Color.colorCreateBarcode);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorCreateBarcode));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorCreateBarcode);
-                    break;
-                case "2":
-                    Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorFdaRecallDark));
-                    toolbar.SetBackgroundResource(Resource.Color.colorFdaRecall);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorFdaRecall));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorFdaRecall);
-                    break;
-                case "3":
-                    Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorUpcLookupDark));
-                    toolbar.SetBackgroundResource(Resource.Color.colorUpcLookup);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorUpcLookup));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorUpcLookup);
-                    break;
-            }
             SetSupportActionBar(toolbar);
 
             // Show the Up button in the action bar.
