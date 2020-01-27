@@ -184,21 +184,21 @@ namespace Zebra.Savanna.Sample
             switch (_item.Id)
             {
                 case "1":
-                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorCreateBarcodeDark));
+                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorCreateBarcodeDark, Activity.Theme));
                     toolbar.SetBackgroundResource(Resource.Color.colorCreateBarcode);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorCreateBarcode));
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorCreateBarcode, Activity.Theme));
                     toolbarLayout.SetBackgroundResource(Resource.Color.colorCreateBarcode);
                     break;
                 case "2":
-                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorFdaRecallDark));
+                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorFdaRecallDark, Activity.Theme));
                     toolbar.SetBackgroundResource(Resource.Color.colorFdaRecall);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorFdaRecall));
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorFdaRecall, Activity.Theme));
                     toolbarLayout.SetBackgroundResource(Resource.Color.colorFdaRecall);
                     break;
                 case "3":
-                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorUpcLookupDark));
+                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorUpcLookupDark, Activity.Theme));
                     toolbar.SetBackgroundResource(Resource.Color.colorUpcLookup);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorUpcLookup));
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorUpcLookup, Activity.Theme));
                     toolbarLayout.SetBackgroundResource(Resource.Color.colorUpcLookup);
                     break;
             }
