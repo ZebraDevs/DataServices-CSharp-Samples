@@ -2,10 +2,8 @@ using Android.App;
 using Android.Content;
 using Android.OS;
 using Android.Views;
-
 using AndroidX.AppCompat.App;
 using AndroidX.AppCompat.Widget;
-using Google.Android.Material.AppBar;
 using System;
 
 namespace Zebra.Savanna.Sample

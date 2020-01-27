@@ -5,9 +5,9 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.AppCompat.App;
 using AndroidX.RecyclerView.Widget;
-using Zebra.Savanna.Sample.API;
 using System;
 using System.Collections.Generic;
+using Zebra.Savanna.Sample.API;
 
 namespace Zebra.Savanna.Sample
 {

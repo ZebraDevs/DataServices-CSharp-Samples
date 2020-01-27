@@ -2,15 +2,15 @@ using Android.Content;
 using Android.Graphics;
 using Android.OS;
 using Android.Preferences;
+using Android.Text;
 using Android.Views;
+using Android.Widget;
 using AndroidX.Fragment.App;
-using Zebra.Savanna.Sample.API;
 using Google.Android.Material.AppBar;
-using Zebra.Savanna.Models;
 using System;
 using System.Linq;
-using Android.Widget;
-using Toolbar = AndroidX.AppCompat.Widget.Toolbar;
+using Zebra.Savanna.Models;
+using Zebra.Savanna.Sample.API;
 
 namespace Zebra.Savanna.Sample
 {
@@ -20,7 +20,7 @@ namespace Zebra.Savanna.Sample
     /// in two-pane mode (on tablets) or a <see cref="ItemDetailActivity"/>
     /// on handsets.
     /// </summary>
-    public class ItemDetailFragment : Fragment, View.IOnClickListener
+    public class ItemDetailFragment : Fragment, View.IOnClickListener, ITextWatcher
     {
         /// <summary>
         /// The fragment argument representing the item ID that this fragment
@@ -179,7 +179,7 @@ namespace Zebra.Savanna.Sample
                 _item = ItemListActivity._content[key];
             }
 
-            var toolbar = Activity.FindViewById<Toolbar>(Resource.Id.detail_toolbar);
+            var toolbar = Activity.FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.detail_toolbar);
             var toolbarLayout = Activity.FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
             switch (_item.Id)
             {
@@ -239,10 +239,13 @@ namespace Zebra.Savanna.Sample
                         Context context = Context;
                         if (context != null)
                         {
-                            Array syms = Enum.GetValues(typeof(Symbology));
+                            Array syms = System.Enum.GetValues(typeof(Symbology));
                             Symbology[] values = new Symbology[syms.Length];
                             syms.CopyTo(values, 0);
-                            types.Adapter = new ArrayAdapter(context, Android.Resource.Layout.SimpleSpinnerDropDownItem, values.Select(s => s.ToString().Replace('_', '-')).ToList());
+                            types.Adapter = new ArrayAdapter(context, Android.Resource.Layout.SimpleSpinnerDropDownItem,
+                                values.Select(s => s.ToString().Replace('_', '-'))
+                                .Prepend(Resources.GetString(Resource.String.barcode_type)).ToList());
+                            types.ItemSelected += Types_ItemSelected;
                         }
                         ImageView barcode = createView.FindViewById<ImageView>(Resource.Id.barcode);
                         if (_barcodeImage == null && _details.Equals(""))
@@ -260,8 +263,10 @@ namespace Zebra.Savanna.Sample
                         break;
                     case "2":
                         View recallView = inflater.Inflate(Resource.Layout.fda_recall, container, false);
+                        EditText searchText = recallView.FindViewById<EditText>(Resource.Id.fdaSearchTerm);
                         Button recalls = recallView.FindViewById<Button>(Resource.Id.fdaSearch);
                         recalls.SetOnClickListener(this);
+                        searchText.AddTextChangedListener(this);
                         TextView recallResults = recallView.FindViewById<TextView>(Resource.Id.resultData);
                         recallResults.Text = _details;
                         root.AddView(recallView);
@@ -270,6 +275,9 @@ namespace Zebra.Savanna.Sample
                         View lookupView = inflater.Inflate(Resource.Layout.upc_lookup, container, false);
                         TextView results = lookupView.FindViewById<TextView>(Resource.Id.resultData);
                         results.Text = _details;
+
+                        EditText lookupText = lookupView.FindViewById<EditText>(Resource.Id.upc);
+                        lookupText.AddTextChangedListener(this);
 
                         Button lookup = lookupView.FindViewById<Button>(Resource.Id.upc_lookup);
                         lookup.SetOnClickListener(this);
@@ -280,6 +288,36 @@ namespace Zebra.Savanna.Sample
             }
 
             return root;
+        }
+
+        private void Types_ItemSelected(object sender, AdapterView.ItemSelectedEventArgs e)
+        {
+            if (!(View is ViewGroup root)) return;
+            EditText barcodeText = root.FindViewById<EditText>(Resource.Id.barcodeText);
+            barcodeText.Visibility = e.Position == 0 ? ViewStates.Gone : ViewStates.Visible;
+        }
+
+        public void AfterTextChanged(IEditable s) { }
+
+        public void BeforeTextChanged(Java.Lang.ICharSequence s, int start, int count, int after) { }
+
+        public void OnTextChanged(Java.Lang.ICharSequence s, int start, int before, int count)
+        {
+            if (!(View is ViewGroup root)) return;
+            int buttonId;
+            switch (_item.Id)
+            {
+                case "2":
+                    buttonId = Resource.Id.fdaSearch;
+                    break;
+                case "3":
+                    buttonId = Resource.Id.upc_lookup;
+                    break;
+                default:
+                    return;
+            }
+            var button = root.FindViewById<Button>(buttonId);
+            button.Enabled = s.ToString().Trim().Length > 0;
         }
 
         public async void OnClick(View v)
