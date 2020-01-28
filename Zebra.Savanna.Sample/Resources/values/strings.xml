@@ -18,7 +18,7 @@
   <string name="fda_recall_details">Use this function to search for FDA recall notices by scanning a UPC label or entering a valid search term.</string>
   <string name="fda_scan">Scan a UPC label or enter a search term</string>
   <string name="fdaSearch">Search FDA Recalls</string>
-  <string name="searchResults">Search Results:</string>
+  <string name="searchResults">Search results:</string>
 
   <string name="upc_lookup">UPC Lookup</string>
   <string name="upc_lookup_details">Use this function to retrieve product information in JSON format for any UPC code entered.</string>

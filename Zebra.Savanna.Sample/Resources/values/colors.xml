@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#007ABA</color>
-    <color name="colorPrimaryDark">#006194</color>
-    <color name="colorCreateBarcode">#26A69A</color>
-    <color name="colorCreateBarcodeDark">#1E847B</color>
-    <color name="colorFdaRecall">#FF5722</color>
-    <color name="colorFdaRecallDark">#CC451B</color>
-    <color name="colorUpcLookup">#3949AB</color>
-    <color name="colorUpcLookupDark">#2D3A88</color>
-    <color name="colorAccent">#007ABA</color>
+  <color name="colorPrimary">#007ABA</color>
+  <color name="colorPrimaryDark">#006194</color>
+  <color name="colorCreateBarcode">#26A69A</color>
+  <color name="colorCreateBarcodeDark">#1E847B</color>
+  <color name="colorFdaRecall">#FF5722</color>
+  <color name="colorFdaRecallDark">#CC451B</color>
+  <color name="colorUpcLookup">#3949AB</color>
+  <color name="colorUpcLookupDark">#2D3A88</color>
+  <color name="colorAccent">#007ABA</color>
 </resources>

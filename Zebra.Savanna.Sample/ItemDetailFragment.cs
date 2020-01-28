@@ -7,6 +7,8 @@ using Android.Views;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using Google.Android.Material.AppBar;
+using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
 using System;
 using System.Linq;
 using Zebra.Savanna.Models.Errors;
@@ -122,8 +124,8 @@ namespace Zebra.Savanna.Sample
                     {
                         // Call to external Zebra FDA Food Recall API
                         var foodUpcJson = await FDARecall.FoodUpcAsync(barcode);
-
-                        OnPostExecute(foodUpcJson);
+                     
+                        OnPostExecute(JToken.Parse(foodUpcJson).ToString(Formatting.Indented));
                     }
                     catch (Exception e)
                     {
@@ -134,7 +136,7 @@ namespace Zebra.Savanna.Sample
                         // Call to external Zebra FDA Drug Recall API
                         var drugUpcJson = await FDARecall.DrugUpcAsync(barcode);
 
-                        OnPostExecute(drugUpcJson);
+                        OnPostExecute(JToken.Parse(drugUpcJson).ToString(Formatting.Indented));
                     }
                     catch (Exception e)
                     {
@@ -151,7 +153,7 @@ namespace Zebra.Savanna.Sample
                         // Call to external Zebra UPC Lookup API
                         var upcLookupJson = await UPCLookup.LookupAsync(barcode);
 
-                        OnPostExecute(upcLookupJson);
+                        OnPostExecute(JToken.Parse(upcLookupJson).ToString(Formatting.Indented));
                     }
                     catch (Exception e)
                     {
@@ -300,7 +302,9 @@ namespace Zebra.Savanna.Sample
         {
             if (!(View is ViewGroup root)) return;
             EditText barcodeText = root.FindViewById<EditText>(Resource.Id.barcodeText);
+            Button generate = root.FindViewById<Button>(Resource.Id.createBarcode);
             barcodeText.Visibility = e.Position == 0 ? ViewStates.Gone : ViewStates.Visible;
+            generate.Enabled = e.Position > 0;
         }
 
         public void AfterTextChanged(IEditable s) { }
@@ -355,7 +359,7 @@ namespace Zebra.Savanna.Sample
                             // Call to external Zebra FDA Device Recall Search API
                             var deviceSearchJson = await FDARecall.DeviceSearchAsync(searchText.Text);
 
-                            OnPostExecute(deviceSearchJson);
+                            OnPostExecute(JToken.Parse(deviceSearchJson).ToString(Formatting.Indented));
                         }
                         catch (Exception e)
                         {
@@ -367,7 +371,7 @@ namespace Zebra.Savanna.Sample
                             // Call to external Zebra FDA Drug Recall Search API
                             var drugSearchJson = await FDARecall.DrugSearchAsync(searchText.Text);
 
-                            OnPostExecute(drugSearchJson);
+                            OnPostExecute(JToken.Parse(drugSearchJson).ToString(Formatting.Indented));
                         }
                         catch (Exception e)
                         {
@@ -380,7 +384,7 @@ namespace Zebra.Savanna.Sample
                         // Call to external Zebra UPC Lookup API
                         var upcLookupJson = await UPCLookup.LookupAsync(lookupText.Text);
 
-                        OnPostExecute(upcLookupJson);
+                        OnPostExecute(JToken.Parse(upcLookupJson).ToString(Formatting.Indented));
                         return;
                 }
             }
