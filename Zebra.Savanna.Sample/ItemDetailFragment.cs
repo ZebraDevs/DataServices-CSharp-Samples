@@ -77,15 +77,24 @@ namespace Zebra.Savanna.Sample
             }
             else
             {
+                var noResults = Resources.GetString(Resource.String.noResults);
                 string json = (string)apiData;
+                if (json == "{}")
+                {
+                    json = string.Empty;
+                }
                 results.Visibility = ViewStates.Visible;
-                if (_details.Length == 0)
+                if (_details.Length == 0 || _details == noResults)
                 {
                     _details = json;
                 }
-                else
+                else if (_details != json && !string.IsNullOrWhiteSpace(json))
                 {
                     _details += "\n" + json;
+                }
+                if (_details.Length == 0)
+                {
+                    _details = noResults;
                 }
                 results.Text = _details;
                 if (barcode != null)
@@ -124,7 +133,7 @@ namespace Zebra.Savanna.Sample
                     {
                         // Call to external Zebra FDA Food Recall API
                         var foodUpcJson = await FDARecall.FoodUpcAsync(barcode);
-                     
+
                         OnPostExecute(JToken.Parse(foodUpcJson).ToString(Formatting.Indented));
                     }
                     catch (Exception e)
