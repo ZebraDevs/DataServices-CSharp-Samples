@@ -313,26 +313,6 @@
             eBay.com, you can simply locate the item by http://www.ebay.com/itm/[eLID].
             </summary>
         </member>
-        <member name="T:Zebra.Savanna.Models.Detail">
-            <summary>
-            Provides details about the results of an API call.
-            </summary>
-        </member>
-        <member name="P:Zebra.Savanna.Models.Detail.ErrorCode">
-            <summary>
-            The error code encountered while invoking the API.
-            </summary>
-        </member>
-        <member name="T:Zebra.Savanna.Models.DeveloperMessage">
-            <summary>
-            Provides information about the results of an API call.
-            </summary>
-        </member>
-        <member name="P:Zebra.Savanna.Models.DeveloperMessage.Fault">
-            <summary>
-            Describes issues encountered while invoking the API.
-            </summary>
-        </member>
         <member name="T:Zebra.Savanna.Models.Device">
             <summary>
             Device recall report.
@@ -435,39 +415,59 @@
             HDE
             </summary>
         </member>
-        <member name="T:Zebra.Savanna.Models.Error`1">
+        <member name="T:Zebra.Savanna.Models.Errors.Detail">
+            <summary>
+            Provides details about the results of an API call.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Errors.Detail.ErrorCode">
+            <summary>
+            The error code encountered while invoking the API.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Errors.DeveloperMessage">
+            <summary>
+            Provides information about the results of an API call.
+            </summary>
+        </member>
+        <member name="P:Zebra.Savanna.Models.Errors.DeveloperMessage.Fault">
+            <summary>
+            Describes issues encountered while invoking the API.
+            </summary>
+        </member>
+        <member name="T:Zebra.Savanna.Models.Errors.Error`1">
             <summary>
             Thrown when a Savanna API call does not succeed.
             </summary>
             <typeparam name="T"></typeparam>
         </member>
-        <member name="P:Zebra.Savanna.Models.Error`1.Code">
+        <member name="P:Zebra.Savanna.Models.Errors.Error`1.Code">
             <summary>
             The status code returned by the API.
             </summary>
         </member>
-        <member name="P:Zebra.Savanna.Models.Error`1.Info">
+        <member name="P:Zebra.Savanna.Models.Errors.Error`1.Info">
             <summary>
             Link to a web page providing more information about result of the API call.
             </summary>
         </member>
-        <member name="P:Zebra.Savanna.Models.Error`1.DeveloperMessage">
+        <member name="P:Zebra.Savanna.Models.Errors.Error`1.DeveloperMessage">
             <summary>
             Provides information about the result of the API call.
             </summary>
         </member>
-        <member name="M:Zebra.Savanna.Models.Error`1.#ctor">
+        <member name="M:Zebra.Savanna.Models.Errors.Error`1.#ctor">
             <summary>
-            Initializes a new instance of the <see cref="T:Zebra.Savanna.Models.Error`1"/> class.
+            Initializes a new instance of the <see cref="T:Zebra.Savanna.Models.Errors.Error`1"/> class.
             </summary>
         </member>
-        <member name="M:Zebra.Savanna.Models.Error`1.#ctor(System.String)">
+        <member name="M:Zebra.Savanna.Models.Errors.Error`1.#ctor(System.String)">
             <summary>
-            Initializes a new instance of the <see cref="T:Zebra.Savanna.Models.Error`1"/> class with a specified error message.
+            Initializes a new instance of the <see cref="T:Zebra.Savanna.Models.Errors.Error`1"/> class with a specified error message.
             </summary>
             <param name="message">The message that describes the error.</param>
         </member>
-        <member name="M:Zebra.Savanna.Models.Error`1.#ctor(System.String,System.Exception)">
+        <member name="M:Zebra.Savanna.Models.Errors.Error`1.#ctor(System.String,System.Exception)">
             <summary>
             Initializes a new instance of the System.Exception class with a specified error message and a reference to
             the inner exception that is the cause of this exception.
@@ -476,17 +476,17 @@
             <param name="innerException">The exception that is the cause of the current exception, or a null reference
             if no inner exception is specified.</param>
         </member>
-        <member name="T:Zebra.Savanna.Models.Fault">
+        <member name="T:Zebra.Savanna.Models.Errors.Fault">
             <summary>
             Describes issues encountered while invoking an API.
             </summary>
         </member>
-        <member name="P:Zebra.Savanna.Models.Fault.FaultString">
+        <member name="P:Zebra.Savanna.Models.Errors.Fault.FaultString">
             <summary>
             The fault that occurred.
             </summary>
         </member>
-        <member name="P:Zebra.Savanna.Models.Fault.Detail">
+        <member name="P:Zebra.Savanna.Models.Errors.Fault.Detail">
             <summary>
             Provides details about the results of the API call.
             </summary>

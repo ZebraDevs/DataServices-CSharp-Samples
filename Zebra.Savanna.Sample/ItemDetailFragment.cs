@@ -9,7 +9,7 @@ using AndroidX.Fragment.App;
 using Google.Android.Material.AppBar;
 using System;
 using System.Linq;
-using Zebra.Savanna.Models;
+using Zebra.Savanna.Models.Errors;
 using Zebra.Savanna.Sample.API;
 
 namespace Zebra.Savanna.Sample
