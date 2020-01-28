@@ -18,7 +18,7 @@ namespace Zebra.Savanna.Sample
         ParentActivity = typeof(ItemListActivity),
         Theme = "@style/AppTheme.NoActionBar")]
     [MetaData("android.support.PARENT_ACTIVITY",
-        Value ="com.zebra.savanna.sample.ItemListActivity")]
+        Value = "com.zebra.savanna.sample.ItemListActivity")]
     public class ItemDetailActivity : AppCompatActivity, IScanReceiver
     {
         //
@@ -43,11 +43,7 @@ namespace Zebra.Savanna.Sample
             SetSupportActionBar(toolbar);
 
             // Show the Up button in the action bar.
-            var actionBar = SupportActionBar;
-            if (actionBar != null)
-            {
-                actionBar.SetDisplayHomeAsUpEnabled(true);
-            }
+            SupportActionBar?.SetDisplayHomeAsUpEnabled(true);
 
             // savedInstanceState is non-null when there is fragment state
             // saved from previous configurations of this activity

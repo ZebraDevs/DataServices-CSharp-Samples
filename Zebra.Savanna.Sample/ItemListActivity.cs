@@ -25,7 +25,6 @@ namespace Zebra.Savanna.Sample
         Theme = "@style/AppTheme.NoActionBar")]
     public class ItemListActivity : AppCompatActivity, IScanReceiver
     {
-        public static int Density { get; set; }
         internal static APIContent _content;
 
         /// <summary>
@@ -82,7 +81,6 @@ namespace Zebra.Savanna.Sample
             filter.AddCategory(Intent.CategoryDefault);
             filter.AddAction(Resources.GetString(Resource.String.activity_intent_filter_action));
             RegisterReceiver(_broadcastReceiver, filter);
-            Density = (int)Math.Ceiling(Resources.DisplayMetrics.Density);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)

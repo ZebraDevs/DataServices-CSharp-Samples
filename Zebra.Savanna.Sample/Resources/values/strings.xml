@@ -1,30 +1,32 @@
 <resources>
-    <string name="app_name">Barcode Intelligence Tools</string>
+  <string name="app_name">Barcode Intelligence Tools</string>
 
-    <string name="activity_intent_filter_action">com.zebra.SCAN</string>
-    <string name="datawedge_intent_key_source">com.symbol.datawedge.source</string>
-    <string name="datawedge_intent_key_label_type">com.symbol.datawedge.label_type</string>
-    <string name="datawedge_intent_key_data">com.symbol.datawedge.data_string</string>
+  <string name="activity_intent_filter_action">com.zebra.SCAN</string>
+  <string name="datawedge_intent_key_source">com.symbol.datawedge.source</string>
+  <string name="datawedge_intent_key_label_type">com.symbol.datawedge.label_type</string>
+  <string name="datawedge_intent_key_data">com.symbol.datawedge.data_string</string>
 
-    <string name="create_barcode">Create Barcode</string>
-    <string name="create_barcode_details">Use this function to generate a PNG image of a barcode. Select a barcode type and enter any text.</string>
-    <string name="barcode_type">Barcode type</string>
-    <string name="include_text">Include text</string>
-    <string name="create_hint">Example: Barcode text</string>
-    <string name="generate_barcode">Generate Barcode</string>
+  <string name="create_barcode">Create Barcode</string>
+  <string name="create_barcode_details">Use this function to generate a PNG image of a barcode. Select a barcode type and enter any text.</string>
+  <string name="barcode_type">Barcode type</string>
+  <string name="include_text">Include text</string>
+  <string name="create_hint">Example: Barcode text</string>
+  <string name="generate_barcode">Generate Barcode</string>
+  <string name="upcResults">Barcode:</string>
 
-    <string name="fda_recall">FDA Recall</string>
-    <string name="fda_recall_details">Use this function to search for FDA recall notices by scanning a UPC label or entering a valid search term.</string>
-    <string name="fda_scan">Scan a UPC label or enter a search term</string>
-    <string name="fdaSearch">Search FDA Recalls</string>
+  <string name="fda_recall">FDA Recall</string>
+  <string name="fda_recall_details">Use this function to search for FDA recall notices by scanning a UPC label or entering a valid search term.</string>
+  <string name="fda_scan">Scan a UPC label or enter a search term</string>
+  <string name="fdaSearch">Search FDA Recalls</string>
+  <string name="searchResults">Search Results:</string>
 
-    <string name="upc_lookup">UPC Lookup</string>
-    <string name="upc_lookup_details">Use this function to retrieve product information in JSON format for any UPC code entered.</string>
-    <string name="scan">Enter a UPC or scan a barcode</string>
-    <string name="lookup_upc">Lookup UPC</string>
+  <string name="upc_lookup">UPC Lookup</string>
+  <string name="upc_lookup_details">Use this function to retrieve product information in JSON format for any UPC code entered.</string>
+  <string name="scan">Enter a UPC or scan a barcode</string>
+  <string name="lookup_upc">Lookup UPC</string>
 
-    <!-- Preferences -->
-    <string name="title_activity_settings">Settings</string>
-    <string name="service_settings">Service Settings</string>
-    <string name="apikey_title">Your API Key</string>
+  <!-- Preferences -->
+  <string name="title_activity_settings">Settings</string>
+  <string name="service_settings">Service Settings</string>
+  <string name="apikey_title">Your API Key:</string>
 </resources>

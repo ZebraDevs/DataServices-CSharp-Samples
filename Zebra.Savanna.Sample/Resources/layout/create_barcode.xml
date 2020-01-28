@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical">
@@ -34,23 +33,28 @@
         android:padding="18dp"
         android:text="@string/generate_barcode" />
 
-    <FrameLayout
+    <TextView
+        android:id="@+id/resultLabel"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:text="@string/upcResults" />
 
-        <ImageView
-            android:id="@+id/barcode"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:adjustViewBounds="true"
-            android:scaleType="fitStart"
-            app:srcCompat="?android:attr/panelBackground" />
+    <ImageView
+        android:id="@+id/barcode"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:adjustViewBounds="true"
+        android:scaleType="fitStart" />
 
-        <TextView
-            android:id="@+id/resultData"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:visibility="gone" />
-    </FrameLayout>
+    <TextView
+        android:id="@+id/resultData"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:visibility="gone" />
 
 </LinearLayout>

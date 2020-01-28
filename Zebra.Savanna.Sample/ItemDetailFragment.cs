@@ -34,6 +34,7 @@ namespace Zebra.Savanna.Sample
         private static ApiItem _item;
         private static string _details = "";
         private static Bitmap _barcodeImage;
+        private int _density;
 
         /// <summary>
         /// Mandatory empty constructor for the fragment manager to instantiate the
@@ -45,10 +46,12 @@ namespace Zebra.Savanna.Sample
         /// Handle a response from Zebra Savanna APIs
         /// </summary>
         /// <param name="apiData">An object representing a json string, <see cref="byte[]"/>, or <see cref="Error{T}"/>.</param>
-        private void OnPostExecute(object apiData)
+        private void OnPostExecute(object apiData, bool showHeader = true)
         {
             ViewGroup root = (ViewGroup)View;
             if (root == null) return;
+            TextView barcodeLabel = root.FindViewById<TextView>(Resource.Id.resultLabel);
+            barcodeLabel.Visibility = showHeader ? ViewStates.Visible : ViewStates.Gone;
             ImageView barcode = root.FindViewById<ImageView>(Resource.Id.barcode);
             TextView results = root.FindViewById<TextView>(Resource.Id.resultData);
             if (apiData is byte[] data)
@@ -60,15 +63,15 @@ namespace Zebra.Savanna.Sample
             }
             else if (apiData is Error<string> e)
             {
-                OnPostExecute(e.DeveloperMessage == null || e.DeveloperMessage == e.Message ? e.Message : $"{e.Message}: {e.DeveloperMessage}");
+                OnPostExecute(e.DeveloperMessage == null || e.DeveloperMessage == e.Message ? e.Message : $"{e.Message}: {e.DeveloperMessage}", false);
             }
             else if (apiData is Error<DeveloperMessage> dm)
             {
-                OnPostExecute(dm.DeveloperMessage == null || dm.DeveloperMessage.Fault.FaultString == dm.Message ? dm.Message : $"{dm.Message}: {dm.DeveloperMessage.Fault.FaultString}");
+                OnPostExecute(dm.DeveloperMessage == null || dm.DeveloperMessage.Fault.FaultString == dm.Message ? dm.Message : $"{dm.Message}: {dm.DeveloperMessage.Fault.FaultString}", false);
             }
             else if (apiData is Exception ex)
             {
-                OnPostExecute(ex.Message);
+                OnPostExecute(ex.Message, false);
             }
             else
             {
@@ -84,7 +87,9 @@ namespace Zebra.Savanna.Sample
                 }
                 results.Text = _details;
                 if (barcode != null)
+                {
                     barcode.Visibility = ViewStates.Gone;
+                }
             }
         }
 
@@ -160,6 +165,7 @@ namespace Zebra.Savanna.Sample
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
+            _density = (int)Math.Ceiling(Resources.DisplayMetrics.Density);
             Instance = this;
 
             Bundle args = Arguments;
@@ -239,7 +245,7 @@ namespace Zebra.Savanna.Sample
                         Context context = Context;
                         if (context != null)
                         {
-                            Array syms = System.Enum.GetValues(typeof(Symbology));
+                            Array syms = Enum.GetValues(typeof(Symbology));
                             Symbology[] values = new Symbology[syms.Length];
                             syms.CopyTo(values, 0);
                             types.Adapter = new ArrayAdapter(context, Android.Resource.Layout.SimpleSpinnerDropDownItem,
@@ -338,7 +344,7 @@ namespace Zebra.Savanna.Sample
                         var symbology = Enum.Parse<Symbology>(barcodeType.SelectedItem.ToString().Replace('-', '_'));
 
                         // Call to external Zebra Create Barcode API
-                        var barcodeBytes = await CreateBarcode.CreateAsync(symbology, barcodeText.Text, ItemListActivity.Density, Rotation.Normal, includeText.Checked);
+                        var barcodeBytes = await CreateBarcode.CreateAsync(symbology, barcodeText.Text, _density * 3, Rotation.Normal, includeText.Checked);
 
                         OnPostExecute(barcodeBytes);
                         return;

@@ -24,6 +24,16 @@
         android:text="@string/fdaSearch" />
 
     <TextView
+        android:id="@+id/resultLabel"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:textStyle="bold"
+        android:visibility="gone"
+        android:layout_margin="8dp"
+        android:textSize="16sp"
+        android:text="@string/searchResults" />
+
+    <TextView
         android:id="@+id/resultData"
         android:layout_width="match_parent"
         android:layout_height="match_parent"

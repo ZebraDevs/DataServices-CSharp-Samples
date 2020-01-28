@@ -22,11 +22,7 @@ namespace Zebra.Savanna.Sample
                     .BeginTransaction()
                     .Replace(Resource.Id.settings, new SettingsFragment())
                     .Commit();
-            var actionBar = SupportActionBar;
-            if (actionBar != null)
-            {
-                actionBar.SetDisplayHomeAsUpEnabled(true);
-            }
+            SupportActionBar?.SetDisplayHomeAsUpEnabled(true);
         }
 
         public override bool OnOptionsItemSelected(IMenuItem item)
