@@ -65,7 +65,8 @@ namespace Zebra.Savanna.Sample
             }
             else if (apiData is Error<string> e)
             {
-                OnPostExecute(e.DeveloperMessage == null || e.DeveloperMessage == e.Message ? e.Message : $"{e.Message}: {e.DeveloperMessage}", false);
+                string message = e.ErrorDetail ?? e.DeveloperMessage;
+                OnPostExecute(message == null || message == e.Message ? e.Message : $"{e.Message}: {message}", false);
             }
             else if (apiData is Error<DeveloperMessage> dm)
             {
@@ -112,8 +113,6 @@ namespace Zebra.Savanna.Sample
             if (symbology.Equals("upce0"))
             {
                 symbology = "upce";
-                if (barcode.Length == 6)
-                    barcode = "0" + barcode + "0";
             }
             switch (_item.Id)
             {
@@ -124,7 +123,7 @@ namespace Zebra.Savanna.Sample
                     Spinner barcodeType = root.FindViewById<Spinner>(Resource.Id.barcodeTypes);
                     int index = Array.IndexOf(Enum.GetValues(typeof(Symbology)), Enum.Parse<Symbology>(symbology.Replace('-', '_')));
                     if (index > -1)
-                        barcodeType.SetSelection(index);
+                        barcodeType.SetSelection(index + 1);
                     return;
                 case "2":
                     _details = "";
@@ -346,60 +345,65 @@ namespace Zebra.Savanna.Sample
             TextView results = root.FindViewById<TextView>(Resource.Id.resultData);
             _details = "";
             results.Text = _details;
-            try
+            switch (_item.Id)
             {
-                switch (_item.Id)
-                {
-                    case "1":
-                        EditText barcodeText = root.FindViewById<EditText>(Resource.Id.barcodeText);
-                        Spinner barcodeType = root.FindViewById<Spinner>(Resource.Id.barcodeTypes);
-                        CheckBox includeText = root.FindViewById<CheckBox>(Resource.Id.includeText);
-                        var symbology = Enum.Parse<Symbology>(barcodeType.SelectedItem.ToString().Replace('-', '_'));
-
+                case "1":
+                    EditText barcodeText = root.FindViewById<EditText>(Resource.Id.barcodeText);
+                    Spinner barcodeType = root.FindViewById<Spinner>(Resource.Id.barcodeTypes);
+                    CheckBox includeText = root.FindViewById<CheckBox>(Resource.Id.includeText);
+                    var symbology = Enum.Parse<Symbology>(barcodeType.SelectedItem.ToString().Replace('-', '_'));
+                    try
+                    {
                         // Call to external Zebra Create Barcode API
                         var barcodeBytes = await CreateBarcode.CreateAsync(symbology, barcodeText.Text, _density * 3, Rotation.Normal, includeText.Checked);
 
                         OnPostExecute(barcodeBytes);
-                        return;
-                    case "2":
-                        EditText searchText = root.FindViewById<EditText>(Resource.Id.fdaSearchTerm);
-                        try
-                        {
-                            // Call to external Zebra FDA Device Recall Search API
-                            var deviceSearchJson = await FDARecall.DeviceSearchAsync(searchText.Text);
+                    }
+                    catch (Exception e)
+                    {
+                        OnPostExecute(e);
+                    }
+                    return;
+                case "2":
+                    EditText searchText = root.FindViewById<EditText>(Resource.Id.fdaSearchTerm);
+                    try
+                    {
+                        // Call to external Zebra FDA Device Recall Search API
+                        var deviceSearchJson = await FDARecall.DeviceSearchAsync(searchText.Text);
 
-                            OnPostExecute(JToken.Parse(deviceSearchJson).ToString(Formatting.Indented));
-                        }
-                        catch (Exception e)
-                        {
-                            OnPostExecute(e);
-                        }
+                        OnPostExecute(JToken.Parse(deviceSearchJson).ToString(Formatting.Indented));
+                    }
+                    catch (Exception e)
+                    {
+                        OnPostExecute(e);
+                    }
 
-                        try
-                        {
-                            // Call to external Zebra FDA Drug Recall Search API
-                            var drugSearchJson = await FDARecall.DrugSearchAsync(searchText.Text);
+                    try
+                    {
+                        // Call to external Zebra FDA Drug Recall Search API
+                        var drugSearchJson = await FDARecall.DrugSearchAsync(searchText.Text);
 
-                            OnPostExecute(JToken.Parse(drugSearchJson).ToString(Formatting.Indented));
-                        }
-                        catch (Exception e)
-                        {
-                            OnPostExecute(e);
-                        }
-                        return;
-                    case "3":
-                        EditText lookupText = root.FindViewById<EditText>(Resource.Id.upc);
-
+                        OnPostExecute(JToken.Parse(drugSearchJson).ToString(Formatting.Indented));
+                    }
+                    catch (Exception e)
+                    {
+                        OnPostExecute(e);
+                    }
+                    return;
+                case "3":
+                    EditText lookupText = root.FindViewById<EditText>(Resource.Id.upc);
+                    try
+                    {
                         // Call to external Zebra UPC Lookup API
                         var upcLookupJson = await UPCLookup.LookupAsync(lookupText.Text);
 
                         OnPostExecute(JToken.Parse(upcLookupJson).ToString(Formatting.Indented));
-                        return;
-                }
-            }
-            catch (Exception e)
-            {
-                OnPostExecute(e);
+                    }
+                    catch (Exception e)
+                    {
+                        OnPostExecute(e);
+                    }
+                    return;
             }
         }
     }

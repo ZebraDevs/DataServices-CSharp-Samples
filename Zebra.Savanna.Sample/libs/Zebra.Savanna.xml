@@ -456,6 +456,11 @@
             Provides information about the result of the API call.
             </summary>
         </member>
+        <member name="P:Zebra.Savanna.Models.Errors.Error`1.ErrorDetail">
+            <summary>
+            Provides details about the error encountered while making the API call.
+            </summary>
+        </member>
         <member name="M:Zebra.Savanna.Models.Errors.Error`1.#ctor">
             <summary>
             Initializes a new instance of the <see cref="T:Zebra.Savanna.Models.Errors.Error`1"/> class.
