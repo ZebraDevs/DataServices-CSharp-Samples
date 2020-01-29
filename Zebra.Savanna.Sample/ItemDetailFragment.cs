@@ -113,6 +113,10 @@ namespace Zebra.Savanna.Sample
             if (symbology.Equals("upce0"))
             {
                 symbology = "upce";
+                if (barcode.Length == 6)
+                {
+                    barcode = "0" + barcode;
+                }
             }
             switch (_item.Id)
             {
