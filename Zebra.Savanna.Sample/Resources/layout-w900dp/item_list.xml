@@ -29,7 +29,7 @@
         tools:context="com.zebra.savanna.sample.ItemListActivity"
         tools:listitem="@layout/item_list_content" />
 
-    <FrameLayout
+    <ScrollView
         android:id="@+id/item_detail_container"
         android:layout_width="0dp"
         android:layout_height="match_parent"
