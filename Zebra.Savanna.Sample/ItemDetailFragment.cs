@@ -4,6 +4,7 @@ using Android.OS;
 using Android.Preferences;
 using Android.Text;
 using Android.Views;
+using Android.Views.InputMethods;
 using Android.Widget;
 using AndroidX.Fragment.App;
 using Google.Android.Material.AppBar;
@@ -37,6 +38,7 @@ namespace Zebra.Savanna.Sample
         private static string _details = "";
         private static Bitmap _barcodeImage;
         private int _density;
+        private static bool _showResultsLabel;
 
         /// <summary>
         /// Mandatory empty constructor for the fragment manager to instantiate the
@@ -52,6 +54,7 @@ namespace Zebra.Savanna.Sample
         {
             ViewGroup root = (ViewGroup)View;
             if (root == null) return;
+            _showResultsLabel = showHeader;
             TextView barcodeLabel = root.FindViewById<TextView>(Resource.Id.resultLabel);
             barcodeLabel.Visibility = showHeader ? ViewStates.Visible : ViewStates.Gone;
             ImageView barcode = root.FindViewById<ImageView>(Resource.Id.barcode);
@@ -108,6 +111,7 @@ namespace Zebra.Savanna.Sample
         public async void RouteScanData(string barcode, string symbology)
         {
             if (!(View is ViewGroup root)) return;
+            CloseKeyboard();
             TextView results = root.FindViewById<TextView>(Resource.Id.resultData);
             symbology = symbology.Substring("label-type-".Length);
             string upcA = null;
@@ -122,6 +126,7 @@ namespace Zebra.Savanna.Sample
                 // Calculate UPC-A code for product lookup
                 upcA = BarcodeHelpers.EAN8ToUPCA(barcode);
             }
+            TextView resultLabel;
             switch (_item.Id)
             {
                 case "1":
@@ -136,6 +141,9 @@ namespace Zebra.Savanna.Sample
                 case "2":
                     _details = "";
                     results.Text = _details;
+                    resultLabel = root.FindViewById<TextView>(Resource.Id.resultLabel);
+                    resultLabel.Visibility = ViewStates.Gone;
+                    _showResultsLabel = false;
                     try
                     {
                         // Call to external Zebra FDA Food Recall API
@@ -162,6 +170,9 @@ namespace Zebra.Savanna.Sample
                 case "3":
                     _details = "";
                     results.Text = _details;
+                    resultLabel = root.FindViewById<TextView>(Resource.Id.resultLabel);
+                    resultLabel.Visibility = ViewStates.Gone;
+                    _showResultsLabel = false;
                     EditText upc = root.FindViewById<EditText>(Resource.Id.upc);
                     upc.Text = upcA ?? barcode;
                     try
@@ -179,7 +190,6 @@ namespace Zebra.Savanna.Sample
             }
         }
 
-
         public override void OnCreate(Bundle savedInstanceState)
         {
             base.OnCreate(savedInstanceState);
@@ -195,6 +205,7 @@ namespace Zebra.Savanna.Sample
                 {
                     _barcodeImage = null;
                     _details = "";
+                    _showResultsLabel = false;
                 }
 
                 // Load the item content specified by the fragment
@@ -242,6 +253,7 @@ namespace Zebra.Savanna.Sample
             if (_item != null)
             {
                 root.FindViewById<TextView>(Resource.Id.item_detail).Text = _item.Details;
+                TextView barcodeLabel;
 
                 switch (_item.Id)
                 {
@@ -267,27 +279,35 @@ namespace Zebra.Savanna.Sample
                             types.ItemSelected += Types_ItemSelected;
                         }
                         ImageView barcode = createView.FindViewById<ImageView>(Resource.Id.barcode);
-                        if (_barcodeImage == null && _details.Equals(""))
+                        barcodeLabel = createView.FindViewById<TextView>(Resource.Id.resultLabel);
+                        if (_barcodeImage == null && !string.IsNullOrWhiteSpace(_details))
                         {
                             barcode.Visibility = ViewStates.Gone;
+                            barcodeLabel.Visibility = ViewStates.Gone;
                             createResults.Visibility = ViewStates.Visible;
                         }
                         else
                         {
                             barcode.SetImageBitmap(_barcodeImage);
                             barcode.Visibility = ViewStates.Visible;
-                            createResults.Visibility = ViewStates.Gone;
+                            barcodeLabel.Visibility = _barcodeImage != null ? ViewStates.Visible : ViewStates.Gone;
                         }
                         root.AddView(createView);
                         break;
                     case "2":
                         View recallView = inflater.Inflate(Resource.Layout.fda_recall, container, false);
-                        EditText searchText = recallView.FindViewById<EditText>(Resource.Id.fdaSearchTerm);
+
                         Button recalls = recallView.FindViewById<Button>(Resource.Id.fdaSearch);
                         recalls.SetOnClickListener(this);
+
+                        EditText searchText = recallView.FindViewById<EditText>(Resource.Id.fdaSearchTerm);
                         searchText.AddTextChangedListener(this);
+
                         TextView recallResults = recallView.FindViewById<TextView>(Resource.Id.resultData);
                         recallResults.Text = _details;
+
+                        barcodeLabel = recallView.FindViewById<TextView>(Resource.Id.resultLabel);
+                        barcodeLabel.Visibility = _showResultsLabel ? ViewStates.Visible : ViewStates.Gone;
                         root.AddView(recallView);
                         break;
                     case "3":
@@ -301,6 +321,8 @@ namespace Zebra.Savanna.Sample
                         Button lookup = lookupView.FindViewById<Button>(Resource.Id.upc_lookup);
                         lookup.SetOnClickListener(this);
 
+                        barcodeLabel = lookupView.FindViewById<TextView>(Resource.Id.resultLabel);
+                        barcodeLabel.Visibility = _showResultsLabel ? ViewStates.Visible : ViewStates.Gone;
                         root.AddView(lookupView);
                         break;
                 }
@@ -344,16 +366,23 @@ namespace Zebra.Savanna.Sample
         public async void OnClick(View v)
         {
             if (!(View is ViewGroup root)) return;
-
+            CloseKeyboard();
             TextView results = root.FindViewById<TextView>(Resource.Id.resultData);
             _details = "";
+            _barcodeImage = null;
+            _showResultsLabel = false;
             results.Text = _details;
+            TextView resultLabel = root.FindViewById<TextView>(Resource.Id.resultLabel);
+            resultLabel.Visibility = ViewStates.Gone;
             switch (_item.Id)
             {
                 case "1":
-                    EditText barcodeText = root.FindViewById<EditText>(Resource.Id.barcodeText);
-                    Spinner barcodeType = root.FindViewById<Spinner>(Resource.Id.barcodeTypes);
-                    CheckBox includeText = root.FindViewById<CheckBox>(Resource.Id.includeText);
+                    var barcode = root.FindViewById<ImageView>(Resource.Id.barcode);
+                    barcode.SetImageBitmap(_barcodeImage);
+
+                    var barcodeText = root.FindViewById<EditText>(Resource.Id.barcodeText);
+                    var includeText = root.FindViewById<CheckBox>(Resource.Id.includeText);
+                    var barcodeType = root.FindViewById<Spinner>(Resource.Id.barcodeTypes);
                     var symbology = Enum.Parse<Symbology>(barcodeType.SelectedItem.ToString().Replace('-', '_'));
                     try
                     {
@@ -408,6 +437,13 @@ namespace Zebra.Savanna.Sample
                     }
                     return;
             }
+        }
+
+        private void CloseKeyboard()
+        {
+            // Hide keyboard
+            var imm = (InputMethodManager)Context.GetSystemService(Context.InputMethodService);
+            imm.HideSoftInputFromWindow(View.WindowToken, HideSoftInputFlags.None);
         }
     }
 }
