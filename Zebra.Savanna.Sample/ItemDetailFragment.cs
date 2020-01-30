@@ -1,11 +1,13 @@
 using Android.Content;
 using Android.Graphics;
+using Android.Graphics.Drawables;
 using Android.OS;
 using Android.Preferences;
 using Android.Text;
 using Android.Views;
 using Android.Views.InputMethods;
 using Android.Widget;
+using AndroidX.AppCompat.App;
 using AndroidX.Fragment.App;
 using Google.Android.Material.AppBar;
 using Newtonsoft.Json;
@@ -66,14 +68,9 @@ namespace Zebra.Savanna.Sample
                 barcode.Visibility = ViewStates.Visible;
                 results.Visibility = ViewStates.Gone;
             }
-            else if (apiData is Error<string> e)
+            else if (apiData is Error e)
             {
-                string message = e.ErrorDetail ?? e.DeveloperMessage;
-                OnPostExecute(message == null || message == e.Message ? e.Message : $"{e.Message}: {message}", false);
-            }
-            else if (apiData is Error<DeveloperMessage> dm)
-            {
-                OnPostExecute(dm.DeveloperMessage == null || dm.DeveloperMessage.Fault.FaultString == dm.Message ? dm.Message : $"{dm.Message}: {dm.DeveloperMessage.Fault.FaultString}", false);
+                OnPostExecute(e.MessageFormatted, false);
             }
             else if (apiData is Exception ex)
             {
@@ -220,28 +217,35 @@ namespace Zebra.Savanna.Sample
             var activity = Activity;
             var toolbar = activity.FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.detail_toolbar);
             var toolbarLayout = activity.FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
+            Color bgColor;
             switch (_item.Id)
             {
                 case "1":
                     activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorCreateBarcodeDark, activity.Theme));
-                    toolbar.SetBackgroundResource(Resource.Color.colorCreateBarcode);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorCreateBarcode, activity.Theme));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    toolbar?.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    bgColor = Resources.GetColor(Resource.Color.colorCreateBarcode, activity.Theme);
+                    toolbarLayout?.SetContentScrimColor(bgColor);
+                    toolbarLayout?.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    (activity as AppCompatActivity)?.SupportActionBar?.SetBackgroundDrawable(new ColorDrawable(bgColor));
                     break;
                 case "2":
                     activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorFdaRecallDark, activity.Theme));
-                    toolbar.SetBackgroundResource(Resource.Color.colorFdaRecall);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorFdaRecall, activity.Theme));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    toolbar?.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    bgColor = Resources.GetColor(Resource.Color.colorFdaRecall, activity.Theme);
+                    toolbarLayout?.SetContentScrimColor(bgColor);
+                    toolbarLayout?.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    (activity as AppCompatActivity)?.SupportActionBar?.SetBackgroundDrawable(new ColorDrawable(bgColor));
                     break;
                 case "3":
                     activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorUpcLookupDark, activity.Theme));
-                    toolbar.SetBackgroundResource(Resource.Color.colorUpcLookup);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorUpcLookup, activity.Theme));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    toolbar?.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    bgColor = Resources.GetColor(Resource.Color.colorUpcLookup, activity.Theme);
+                    toolbarLayout?.SetContentScrimColor(bgColor);
+                    toolbarLayout?.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    (activity as AppCompatActivity)?.SupportActionBar?.SetBackgroundDrawable(new ColorDrawable(bgColor));
                     break;
             }
-            toolbarLayout.SetTitle(_item.Content);
+            toolbarLayout?.SetTitle(_item.Content);
 
             var root = (ViewGroup)inflater.Inflate(Resource.Layout.item_detail, container, false);
             var sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(Context);
