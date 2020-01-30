@@ -110,13 +110,17 @@ namespace Zebra.Savanna.Sample
             if (!(View is ViewGroup root)) return;
             TextView results = root.FindViewById<TextView>(Resource.Id.resultData);
             symbology = symbology.Substring("label-type-".Length);
+            string upcA = null;
             if (symbology.Equals("upce0"))
             {
                 symbology = "upce";
                 if (barcode.Length == 6)
                 {
-                    barcode = "0" + barcode;
+                    // Add missing checksum data
+                    barcode = BarcodeHelpers.EANChecksum(barcode);
                 }
+                // Calculate UPC-A code for product lookup
+                upcA = BarcodeHelpers.EAN8ToUPCA(barcode);
             }
             switch (_item.Id)
             {
@@ -159,11 +163,11 @@ namespace Zebra.Savanna.Sample
                     _details = "";
                     results.Text = _details;
                     EditText upc = root.FindViewById<EditText>(Resource.Id.upc);
-                    upc.Text = barcode;
+                    upc.Text = upcA ?? barcode;
                     try
                     {
                         // Call to external Zebra UPC Lookup API
-                        var upcLookupJson = await UPCLookup.LookupAsync(barcode);
+                        var upcLookupJson = await UPCLookup.LookupAsync(upcA ?? barcode);
 
                         OnPostExecute(JToken.Parse(upcLookupJson).ToString(Formatting.Indented));
                     }
@@ -198,40 +202,35 @@ namespace Zebra.Savanna.Sample
                 // to load content from a content provider.
                 _item = ItemListActivity._content[key];
             }
-
-            var toolbar = Activity.FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.detail_toolbar);
-            var toolbarLayout = Activity.FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
-            switch (_item.Id)
-            {
-                case "1":
-                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorCreateBarcodeDark, Activity.Theme));
-                    toolbar.SetBackgroundResource(Resource.Color.colorCreateBarcode);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorCreateBarcode, Activity.Theme));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorCreateBarcode);
-                    break;
-                case "2":
-                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorFdaRecallDark, Activity.Theme));
-                    toolbar.SetBackgroundResource(Resource.Color.colorFdaRecall);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorFdaRecall, Activity.Theme));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorFdaRecall);
-                    break;
-                case "3":
-                    Activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorUpcLookupDark, Activity.Theme));
-                    toolbar.SetBackgroundResource(Resource.Color.colorUpcLookup);
-                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorUpcLookup, Activity.Theme));
-                    toolbarLayout.SetBackgroundResource(Resource.Color.colorUpcLookup);
-                    break;
-            }
         }
 
         public override View OnCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState)
         {
             var activity = Activity;
-            var appBarLayout = activity?.FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
-            if (appBarLayout != null)
+            var toolbar = activity.FindViewById<AndroidX.AppCompat.Widget.Toolbar>(Resource.Id.detail_toolbar);
+            var toolbarLayout = activity.FindViewById<CollapsingToolbarLayout>(Resource.Id.toolbar_layout);
+            switch (_item.Id)
             {
-                appBarLayout.SetTitle(_item.Content);
+                case "1":
+                    activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorCreateBarcodeDark, activity.Theme));
+                    toolbar.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorCreateBarcode, activity.Theme));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorCreateBarcode);
+                    break;
+                case "2":
+                    activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorFdaRecallDark, activity.Theme));
+                    toolbar.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorFdaRecall, activity.Theme));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorFdaRecall);
+                    break;
+                case "3":
+                    activity.Window.SetStatusBarColor(Resources.GetColor(Resource.Color.colorUpcLookupDark, activity.Theme));
+                    toolbar.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    toolbarLayout.SetContentScrimColor(Resources.GetColor(Resource.Color.colorUpcLookup, activity.Theme));
+                    toolbarLayout.SetBackgroundResource(Resource.Color.colorUpcLookup);
+                    break;
             }
+            toolbarLayout.SetTitle(_item.Content);
 
             var root = (ViewGroup)inflater.Inflate(Resource.Layout.item_detail, container, false);
             var sharedPreferences = PreferenceManager.GetDefaultSharedPreferences(Context);
