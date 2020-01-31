@@ -489,7 +489,7 @@
             <summary>
             Thrown when a Savanna API call does not succeed.
             </summary>
-            <typeparam name="T">The type for the <see cref="P:Zebra.Savanna.Models.Errors.Error`1.DeveloperMessage"/>.</typeparam>
+            <typeparam name="T">The type of the <see cref="P:Zebra.Savanna.Models.Errors.Error`1.DeveloperMessage"/>.</typeparam>
         </member>
         <member name="M:Zebra.Savanna.Models.Errors.Error`1.#ctor">
             <summary>
