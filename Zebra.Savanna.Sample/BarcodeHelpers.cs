@@ -12,6 +12,10 @@ namespace Zebra.Savanna.Sample
         /// <returns>The derived UPC-A barcode.</returns>
         public static string EAN8ToUPCA(string ean8)
         {
+            if (ean8.Length < 8)
+            {
+                ean8 = EANChecksum(ean8);
+            }
             if ("012".Contains(ean8[6]))
             {
                 return ean8.Substring(0, 3) + ean8[6] + "0000" + ean8.Substring(3, 3) + ean8[7];
@@ -54,7 +58,7 @@ namespace Zebra.Savanna.Sample
             }
             if (barcode.Length == 8 && barcode[^1] != checksum_digit)
             {
-                throw new ArithmeticException($"Provided checksum digit {barcode[^1]} does not match expected checksum of {checksum_digit}.");
+                throw new Exception($"Provided checksum digit {barcode[^1]} does not match expected checksum of {checksum_digit}.");
             }
             return code + checksum_digit;
         }
