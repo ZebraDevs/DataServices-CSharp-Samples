@@ -112,16 +112,11 @@ namespace Zebra.Savanna.Sample
             TextView results = root.FindViewById<TextView>(Resource.Id.resultData);
             symbology = symbology.Substring("label-type-".Length);
             string upcA = null;
-            if (symbology.Equals("upce0"))
+            if (symbology.StartsWith("upce"))
             {
                 symbology = "upce";
-                if (barcode.Length == 6)
-                {
-                    // Add missing checksum data
-                    barcode = BarcodeHelpers.EANChecksum(barcode);
-                }
                 // Calculate UPC-A code for product lookup
-                upcA = BarcodeHelpers.EAN8ToUPCA(barcode);
+                upcA = EAN8ToUPCA(barcode);
             }
             TextView resultLabel;
             switch (_item.Id)
@@ -441,6 +436,27 @@ namespace Zebra.Savanna.Sample
                     }
                     return;
             }
+        }
+
+        private string EAN8ToUPCA(string ean8)
+        {
+            if ("012".Contains(ean8[6]))
+            {
+                return ean8.Substring(0, 3) + ean8[6] + "0000" + ean8.Substring(3, 3) + ean8[7];
+            }
+            if (ean8[6] == '3')
+            {
+                return ean8.Substring(0, 4) + "00000" + ean8.Substring(4, 2) + ean8[7];
+            }
+            if (ean8[6] == '4')
+            {
+                return ean8.Substring(0, 5) + "00000" + ean8[5] + ean8[7];
+            }
+            if ("56789".Contains(ean8[6]))
+            {
+                return ean8.Substring(0, 6) + "0000" + ean8.Substring(6, 2);
+            }
+            throw new ArgumentException("Invalid EAN8 barcode.", nameof(ean8));
         }
 
         private void CloseKeyboard()
