@@ -110,7 +110,16 @@ namespace Zebra.Savanna.Sample
             if (!(View is ViewGroup root)) return;
             CloseKeyboard();
             TextView results = root.FindViewById<TextView>(Resource.Id.resultData);
-            symbology = symbology.Substring("label-type-".Length);
+            const string typePrefix = "label-type-";
+            const string gs1Prefix = "gs1-";
+            if (symbology.StartsWith(typePrefix))
+            {
+                symbology = symbology.Substring(typePrefix.Length);
+            }
+            if (symbology.StartsWith(gs1Prefix) && !Enum.TryParse(symbology.Replace('-', '_'), out Symbology _))
+            {
+                symbology = symbology.Substring(gs1Prefix.Length);
+            }
             string upcA = null;
             if (symbology.StartsWith("upce"))
             {
