@@ -127,6 +127,10 @@ namespace Zebra.Savanna.Sample
                 // Calculate UPC-A code for product lookup
                 upcA = EAN8ToUPCA(barcode);
             }
+            if (symbology == "databar")
+            {
+                symbology += barcode.Length > 16 || !long.TryParse(barcode, out _) ? "expanded" : "stackedomni";
+            }
             TextView resultLabel;
             switch (_item.Id)
             {
